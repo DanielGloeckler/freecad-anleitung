@@ -1,5 +1,7 @@
 # FreeCAD-Grundkurs – interaktive Anleitung
 
+**Live:** <https://danielgloeckler.github.io/freecad-anleitung/>
+
 Eine einzelne HTML-Seite, die das FreeCAD-Fenster simuliert: Man klickt sich durch
 13 Schritte – vom leeren Dokument bis zum fertigen Quader 50 × 40 × 10 mm.
 Keine Installation, keine Internetverbindung, keine externen Dateien.
