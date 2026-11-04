@@ -245,8 +245,8 @@ def run():
         pump(400)
 
         # Rechteck 50 x 40, zentriert um den Ursprung
-        pts = [App.Vector(-25, -20, 0), App.Vector(25, -20, 0),
-               App.Vector(25, 20, 0), App.Vector(-25, 20, 0)]
+        pts = [App.Vector(15, 5, 0), App.Vector(65, 5, 0),
+               App.Vector(65, 45, 0), App.Vector(15, 45, 0)]
         for i in range(4):
             sketch.addGeometry(Part.LineSegment(pts[i], pts[(i + 1) % 4]), False)
         for i in range(4):
@@ -255,12 +255,19 @@ def run():
         sketch.addConstraint(Sketcher.Constraint("Horizontal", 2))
         sketch.addConstraint(Sketcher.Constraint("Vertical", 1))
         sketch.addConstraint(Sketcher.Constraint("Vertical", 3))
-        sketch.addConstraint(Sketcher.Constraint("Symmetric", 0, 1, 2, 1, -1, 1))
         doc.recompute()
         pump(500)
         view.fitAll()
         pump(600)
         shot("06_rechteck")
+
+        # Symmetrie: zwei gegenüberliegende Ecken + Ursprung
+        sketch.addConstraint(Sketcher.Constraint("Symmetric", 0, 1, 2, 1, -1, 1))
+        doc.recompute()
+        pump(600)
+        view.fitAll()
+        pump(600)
+        shot("06b_symmetrie")
 
         # --- 7: 50 mm ---------------------------------------------------
         c50 = sketch.addConstraint(Sketcher.Constraint("Distance", 2, 50.0))
