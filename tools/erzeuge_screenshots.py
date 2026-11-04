@@ -455,7 +455,97 @@ def run():
         pump(800)
         shot("17_kopf_fertig")
 
-        # --- 18: Ansicht drehen -----------------------------------------
+        # ================= Tasche in den Kopf ==========================
+        # --- 18: Kopf-Deckflaeche ---------------------------------------
+        head_top = None
+        for i, f in enumerate(head_body.Shape.Faces):
+            n = f.normalAt(0, 0)
+            c = f.CenterOfMass
+            if abs(n.z - 1.0) < 0.01 and abs(c.z - 20.0) < 0.01:
+                head_top = i + 1
+                break
+        log("Kopf-Top-Face: %r" % head_top)
+        Gui.Selection.clearSelection()
+        Gui.Selection.addSelection(head_body, "Face%d" % head_top)
+        pump(800)
+        shot("18_tasche_flaeche")
+
+        # --- 19: Skizze + Rechteck --------------------------------------
+        Gui.runCommand("PartDesign_NewSketch")
+        pump(1400)
+        btn = visible_button("OK")
+        if btn is not None:
+            btn.click()
+            pump(1200)
+        sketches = [o for o in head_body.Group if o.TypeId == "Sketcher::SketchObject"]
+        pocket_sk = sketches[-1]
+        pocket_sk.Label = "Taschenskizze"
+        if not Gui.activeDocument().getInEdit():
+            Gui.activeDocument().setEdit(pocket_sk.Name)
+            pump(600)
+        pp = [App.Vector(-9, -5, 0), App.Vector(9, -5, 0),
+              App.Vector(9, 5, 0), App.Vector(-9, 5, 0)]
+        for i in range(4):
+            pocket_sk.addGeometry(Part.LineSegment(pp[i], pp[(i + 1) % 4]), False)
+        for i in range(4):
+            pocket_sk.addConstraint(Sketcher.Constraint("Coincident", i, 2, (i + 1) % 4, 1))
+        pocket_sk.addConstraint(Sketcher.Constraint("Horizontal", 0))
+        pocket_sk.addConstraint(Sketcher.Constraint("Horizontal", 2))
+        pocket_sk.addConstraint(Sketcher.Constraint("Vertical", 1))
+        pocket_sk.addConstraint(Sketcher.Constraint("Vertical", 3))
+        pocket_sk.addConstraint(Sketcher.Constraint("Symmetric", 0, 1, 2, 1, -1, 1))
+        pocket_sk.addConstraint(Sketcher.Constraint("Distance", 2, 18.0))
+        pocket_sk.addConstraint(Sketcher.Constraint("Distance", 1, 10.0))
+        doc.recompute()
+        pump(700)
+        view = Gui.activeDocument().activeView()
+        view.viewTop()
+        view.fitAll()
+        pump(700)
+        shot("19_tasche_skizze")
+        Gui.activeDocument().resetEdit()
+        pump(800)
+
+        # --- 20: Tasche 4 mm --------------------------------------------
+        pocket = head_body.newObject("PartDesign::Pocket", "Pocket")
+        pocket.Label = "Tasche"
+        pocket.Profile = pocket_sk
+        pocket.Length = 4.0
+        doc.recompute()
+        pump(800)
+        try:
+            pocket_sk.ViewObject.Visibility = False
+        except Exception:
+            pass
+        view = Gui.activeDocument().activeView()
+        view.setCameraType("Perspective")
+        view.viewIsometric()
+        view.fitAll()
+        zoom_out(view, 1)
+        try:
+            Gui.activeDocument().setEdit(pocket.Name)
+            pump(1600)
+        except Exception as exc:
+            log("Tasche-Edit: %r" % (exc,))
+        shot("20_tasche")
+        try:
+            Gui.activeDocument().resetEdit()
+        except Exception:
+            pass
+        pump(800)
+
+        # --- 21: Ergebnis mit Tasche ------------------------------------
+        view = Gui.activeDocument().activeView()
+        view.setCameraType("Perspective")
+        view.viewIsometric()
+        view.fitAll()
+        zoom_out(view, 1)
+        Gui.Selection.clearSelection()
+        pump(800)
+        shot("21_tasche_fertig")
+
+        # --- 22: Ansicht drehen -----------------------------------------
+
         try:
             rotation = App.Rotation(App.Vector(0, 0, 1), 28)
             view.setCameraOrientation(rotation.multiply(view.getCameraOrientation()))
@@ -465,7 +555,7 @@ def run():
             pump(400)
         except Exception as exc:
             log("Ansicht: %r" % (exc,))
-        shot("18_kopf_ansicht")
+        shot("22_ansicht")
 
         # --- 19: Speichern ----------------------------------------------
         doc.saveAs(TMP_DOC)
@@ -477,13 +567,14 @@ def run():
             rect = mw.menuBar().actionGeometry(action)
             menu.popup(mw.menuBar().mapToGlobal(rect.bottomLeft()))
             QtWidgets.QApplication.processEvents()
+            pump(500)
             popup = QtWidgets.QApplication.activePopupWidget()
             log("Datei-Popup: %r" % (popup,))
             if popup is not None:
-                shot("19_speichern", popup)
+                shot("23_speichern", popup)
                 popup.close()
             else:
-                shot("19_speichern")
+                shot("23_speichern")
             pump(300)
         else:
             shot("19_speichern")

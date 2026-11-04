@@ -212,7 +212,7 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 29</span>
+    <span class="progressnum" id="progressNum">1 / 33</span>
   </div>
   <div class="top-actions">
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
@@ -253,7 +253,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 29</span>
+    <span id="lbCaption">1 / 33</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -490,16 +490,48 @@ table.shortcuts td:first-child{width:52%}
       focus:[0.4270, 0.4200, 0.1800, 0.1600], lens:[0.7200, 0.3000], zoom:1.5
     },
     {
+      short:'Vertiefung-Fläche', title:'Deckfläche für die Vertiefung',
+      img:'assets/18_tasche_flaeche.jpg',
+      alt:'Kopf mit grün markierter Deckfläche',
+      lead:'Klick die <b>Deckfläche des Kopfes</b> an.',
+      list:['Sie wird grün markiert.'],
+      focus:[0.4270, 0.4560, 0.2200, 0.1600], lens:[0.7000, 0.3000], zoom:1.5
+    },
+    {
+      short:'Vertiefungs-Skizze', title:'Rechteck für die Vertiefung',
+      img:'assets/19_tasche_skizze.jpg',
+      alt:'Skizze auf der Kopf-Deckfläche mit Rechteck 18 x 10 mm',
+      lead:'Neue Skizze → <b>Rechteck 18 × 10 mm</b> aufziehen und bemaßen.',
+      list:['Starte im Ursprung, <kbd>Esc</kbd> beendet den Befehl.'],
+      focus:[0.4830, 0.3850, 0.1000, 0.1000], lens:[0.7200, 0.3000], zoom:2.0
+    },
+    {
+      short:'Vertiefung 4 mm', title:'Vertiefung 4 mm tief',
+      img:'assets/20_tasche.jpg',
+      alt:'Parameter der Vertiefung mit Tiefe 4 mm und roter Vorschau',
+      lead:'Bei <b>Tiefe</b> den Wert <b>4,00 mm</b> eintragen.',
+      list:['Die rote Vorschau zeigt den Ausschnitt.'],
+      focus:[0.9270, 0.3500, 0.1200, 0.0400], lens:[0.1800, 0.6800], zoom:2.2
+    },
+    {
+      short:'Vertiefung fertig', title:'Vertiefung fertig',
+      img:'assets/21_tasche_fertig.jpg',
+      alt:'Kopf mit rechteckiger Tasche',
+      lead:'Der Kopf hat jetzt eine <b>Vertiefung 18 × 10 × 4 mm</b>.',
+      list:['Im Modellbaum steht <b>Vertiefung</b>.'],
+      focus:[0.4230, 0.3800, 0.1800, 0.1400], lens:[0.7200, 0.3000], zoom:1.5
+    },
+    {
       short:'Ansicht', title:'Ansicht drehen',
-      img:'assets/18_kopf_ansicht.jpg',
-      alt:'Sockel und Kopf aus anderer Richtung mit NaviCube',
+      img:'assets/22_ansicht.jpg',
+      alt:'Sockel, Kopf und Tasche aus anderer Richtung mit NaviCube',
       lead:'Mit dem <b>NaviCube</b> oder der rechten Maustaste drehen.',
       list:['<b>Mausrad</b> = zoomen.'],
       focus:[0.6970, 0.1900, 0.1000, 0.1400], lens:[0.3000, 0.7200], zoom:1.8
     },
     {
       short:'Speichern', title:'Speichern',
-      img:'assets/19_speichern.jpg',
+      img:'assets/23_speichern.jpg',
       alt:'Datei-Menü mit Speichern',
       lead:'Im Menü <b>Datei</b>: Klick auf <b>Speichern</b>.',
       list:['Dateiname z. B. <span class="mono">quader.FCStd</span> – oder <kbd>Strg</kbd>+<kbd>S</kbd>.'],
@@ -508,7 +540,7 @@ table.shortcuts td:first-child{width:52%}
   ];
 
   var N = STEPS.length;
-  var FINAL_IMG = 'assets/17_kopf_fertig.jpg';
+  var FINAL_IMG = 'assets/21_tasche_fertig.jpg';
   var KEY = 'freecad-grundkurs-v3';
 
   var progress = 0;
@@ -636,12 +668,12 @@ table.shortcuts td:first-child{width:52%}
     return '<div class="reader-inner">'+
       '<div class="final-badge">✓</div>'+
       '<div class="kicker">Geschafft</div>'+
-      '<h2>Sockel und Kopf sind fertig</h2>'+
-      '<p class="lead">Zwei Körper: Sockel 50 × 40 × 10 mm und Kopf 30 × 20 × 10 mm.</p>'+
+      '<h2>Sockel, Kopf und Vertiefung</h2>'+
+      '<p class="lead">Zwei Körper mit einer Tasche: Sockel 50 × 40 × 10, Kopf 30 × 20 × 10, Vertiefung 18 × 10 × 4 mm.</p>'+
       '<div class="specs">'+
         '<div><span>Sockel</span><b>50×40×10</b></div>'+
         '<div><span>Kopf</span><b>30×20×10</b></div>'+
-        '<div><span>Körper</span><b>2</b></div>'+
+        '<div><span>Vertiefung</span><b>18×10×4</b></div>'+
       '</div>'+
       '<h3>Kurz gemerkt</h3>'+
       '<ol class="recap">'+
@@ -650,6 +682,7 @@ table.shortcuts td:first-child{width:52%}
         '<li>Bemaßen: 50 und 40 mm</li>'+
         '<li>Skizze schließen, 10 mm aufpolstern</li>'+
         '<li>Kopf als neuen Körper aufsetzen</li>'+
+        '<li>Vertiefung 18 × 10 × 4 mm ausstanzen</li>'+
         '<li>Speichern (.FCStd)</li>'+
       '</ol>'+
       '<h3>Tastenkürzel</h3>'+
@@ -660,7 +693,7 @@ table.shortcuts td:first-child{width:52%}
         '<tr><td>Zoomen</td><td><kbd>Mausrad</kbd></td></tr>'+
       '</table>'+
       '<h3>Weiter üben</h3>'+
-      '<div class="chips"><span class="chip">Tasche</span><span class="chip">Bohrung</span><span class="chip">Verrundung</span><span class="chip">Muster</span></div>'+
+      '<div class="chips"><span class="chip">Vertiefung</span><span class="chip">Bohrung</span><span class="chip">Verrundung</span><span class="chip">Muster</span></div>'+
       '<div class="actions">'+
         '<button class="btn" data-nav="reset">↺ Nochmal von vorn</button>'+
         '<button class="btn primary" data-nav="last">Letzten Schritt ansehen</button>'+
