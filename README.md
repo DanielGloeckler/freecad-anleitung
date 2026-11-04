@@ -25,7 +25,7 @@ Jeder Schritt zeigt einen **echten Screenshot aus FreeCAD 1.1** – und eine
 | 1 | Neue Datei | Kachel „Leere Datei“ |
 | 2 | Part Design | Eintrag in der Arbeitsbereich-Liste |
 | 3 | Neuer Körper | „Neuer Körper“ im Aufgaben-Panel |
-| 4 | Neue Skizze | Skizzen-Symbol in der Symbolleiste |
+| 4 | Neue Skizze | Skizzen-Symbol oben rechts |
 | 5 | XY-Ebene | Zeile „XY-Ebene“ |
 | 6 | OK | OK-Knopf |
 | 7 | Rechteck-Werkzeug | Rechteck-Symbol |
@@ -35,7 +35,7 @@ Jeder Schritt zeigt einen **echten Screenshot aus FreeCAD 1.1** – und eine
 | 11 | Vertikale Bemaßung | vertikales Maß-Symbol |
 | 12 | 40 mm | Maß „40 mm“ |
 | 13 | Skizze schließen | „Schließen“ im Panel |
-| 14 | Aufpolstern | Aufpolstern-Symbol |
+| 14 | Aufpolsterung | Aufpolsterung-Symbol |
 | 15 | Tiefe 10 mm | Feld „Tiefe“ |
 | 16 | OK | OK-Knopf |
 | 17 | Fertig | Eintrag „Aufpolster“ im Modellbaum |
