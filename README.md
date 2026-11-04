@@ -1,86 +1,89 @@
-# FreeCAD-Grundkurs – 19 Schritte mit echten Screenshots
+# FreeCAD-Grundkurs – 29 Schritte mit echten Screenshots
 
 **Live:** <https://danielgloeckler.github.io/freecad-anleitung/>
 
-Eine statische HTML-Seite, die Schritt für Schritt durch ein einfaches
-Part-Design-Bauteil führt: vom leeren Dokument zum Quader **50 × 40 × 10 mm**.
-Jeder Schritt zeigt einen **echten Screenshot aus FreeCAD 1.1** – und eine
-**Lupe**, die genau auf den Knopf zeigt, den man anklicken soll.
+Zwei Körper, ein Bauteil: erst ein **Sockel 50 × 40 × 10 mm**, dann ein
+**Kopf 30 × 20 × 10 mm** obendrauf – als eigener Körper. Jeder Schritt zeigt
+einen **echten Screenshot aus FreeCAD 1.1** mit einer **Lupe** auf dem
+Element, das man anklicken soll.
 
 ## Benutzen
 
-`index.html` im Browser öffnen – fertig.
+`index.html` im Browser öffnen.
 
-- **Weiter / Zurück** rechts, die Schrittliste links oder die Pfeiltasten `←` `→`
-- **Orange Markierung** = hier klicken; die Lupe zeigt die Stelle vergrößert
-- **Bild anklicken** (oder „Bild groß“) → Vollbild, mit `←` `→` durch die Schritte
-- Fortschritt wird lokal gespeichert (`localStorage`), „Neu starten“ setzt zurück
-- Direktlink auf einen Schritt: `index.html?schritt=10`
-- Direktlink auf das Ende: `index.html?schritt=fertig`
+- **Weiter / Zurück** rechts, die Schrittliste links oder `←` `→`
+- **Orange Markierung + Lupe** = hier klicken
+- **Bild anklicken** („Bild groß“) → Vollbild, mit `←` `→` durch die Schritte
+- Fortschritt wird lokal gespeichert, „Neu starten“ setzt zurück
+- Direktlink: `index.html?schritt=21` oder `index.html?schritt=fertig`
 
-## Die 19 Schritte
+## Ablauf
 
-| # | Schritt | Was markiert wird |
-|---|---|---|
-| 1 | Neue Datei | Kachel „Leere Datei“ |
-| 2 | Part Design | Eintrag in der Arbeitsbereich-Liste |
-| 3 | Neuer Körper | „Neuer Körper“ im Aufgaben-Panel |
-| 4 | Neue Skizze | Skizzen-Symbol oben rechts |
-| 5 | XY-Ebene | Zeile „XY-Ebene“ |
-| 6 | OK | OK-Knopf |
-| 7 | Rechteck-Werkzeug | Rechteck-Symbol |
-| 8 | Rechteck zeichnen | Ursprung im Skizzenfeld |
-| 9 | Bemaßung | Bemaßungs-Symbol |
-| 10 | 50 mm | Maß „50 mm“ |
-| 11 | Vertikale Bemaßung | vertikales Maß-Symbol |
-| 12 | 40 mm | Maß „40 mm“ |
-| 13 | Skizze schließen | „Schließen“ im Panel |
-| 14 | Aufpolsterung | Aufpolsterung-Symbol |
-| 15 | Tiefe 10 mm | Feld „Tiefe“ |
-| 16 | OK | OK-Knopf |
-| 17 | Fertig | Eintrag „Aufpolster“ im Modellbaum |
-| 18 | Ansicht | NaviCube |
-| 19 | Speichern | Menüeintrag „Speichern“ |
+**Sockel (Schritte 1–17)**
 
-## Screenshots neu erzeugen
+1. Neue Datei
+2. Arbeitsbereich Part Design
+3. Neuer Körper
+4. Neue Skizze (Panel „Hilfswerkzeuge“)
+5. XY-Ebene
+6. OK
+7. Rechteck-Werkzeug
+8. Rechteck 50 × 40 zeichnen
+9. Bemaßung
+10. 50 mm
+11. Vertikale Bemaßung (Dropdown)
+12. 40 mm
+13. Skizze schließen
+14. Aufpolsterung
+15. Tiefe 10 mm
+16. OK
+17. Sockel fertig
 
-Die Bilder in `assets/` wurden mit **FreeCAD 1.1.4** und
-`tools/erzeuge_screenshots.py` aufgenommen. Das Skript baut das Modell per
-Python-API, öffnet die echten Dialoge und fotografiert das komplette
-FreeCAD-Fenster (`QWidget.grab`, inkl. Menüs).
+**Kopf als neuer Körper (Schritte 18–27)**
+
+18. Neuer Körper „Kopf“
+19. Neue Skizze (Panel „Hilfswerkzeuge“)
+20. Deckfläche des Sockels anklicken
+21. Referenz übernehmen („Erzeugen einer unabhängigen Kopie“)
+22. Rechteck 30 × 20 zeichnen
+23. 30 und 20 mm bemaßen
+24. Skizze schließen
+25. Aufpolsterung, Tiefe 10 mm
+26. OK
+27. Kopf fertig
+
+**Abschluss (Schritte 28–29)**
+
+28. Ansicht drehen (NaviCube)
+29. Speichern
+
+## Screenshots
+
+`assets/01_start.jpg` … `assets/19_speichern.jpg` – alle mit
+**FreeCAD 1.1.4**, dunkles Theme, deutsche Oberfläche.
+
+Neu erzeugen:
 
 ```
 "D:\Programm\FreeCAD 1.1\bin\freecad.exe" tools\erzeuge_screenshots.py
 ```
 
-- Das FreeCAD-Fenster wird dafür kurz auf 1500 × 900 gesetzt.
-- Das Skript schließt das Dokument am Ende ohne Speichern.
-- Ergebnisse: `assets/01_start.jpg` … `assets/13_speichern.jpg`
-- Voraussetzung: FreeCAD 1.1 mit dunklem Theme und deutscher Oberfläche.
+Das Skript baut Sockel und Kopf per Python-API, öffnet die echten Dialoge
+(Befestigung, Referenzübernahme, Aufpolsterung) und fotografiert das
+komplette FreeCAD-Fenster. Das Fenster wird dafür auf 1500 × 844 gesetzt.
 
 ## Lupen anpassen
 
-Jeder Schritt hat drei Werte, alle als Anteile der Bildfläche (0 … 1):
-
 ```js
-focus:[0.44, 0.40, 0.18, 0.025],  // x, y, Breite, Höhe der Markierung
-lens:[0.70, 0.28],                // Mittelpunkt der Lupe
-zoom:1.9                          // Vergrößerung
+focus:[0.48, 0.44, 0.23, 0.035],  // x, y, Breite, Höhe der Markierung
+lens:[0.15, 0.72],                // Mittelpunkt der Lupe
+zoom:1.8                          // Vergrößerung
 ```
 
-`tools/` enthält zusätzlich nichts weiter – die Screenshots werden bei Bedarf
-neu erzeugt; die Lupenwerte stehen direkt in `index.html` (`STEPS`).
-
-## Anpassen
-
-| Was | Wo |
-|---|---|
-| Texte der Schritte | `<script>` → `STEPS` (Titel, Lead, Liste, Tipp, Bildpfad) |
-| Lupen-Position | `focus`, `lens`, `zoom` im jeweiligen Schritt |
-| Farben / Layout | CSS-Variablen in `:root` |
+Alle Werte sind Anteile der Bildfläche (0 … 1), bezogen auf 1500 × 844.
 
 ## Hosting
 
-Die Seite ist rein statisch (HTML + JPG) und läuft überall: GitHub Pages,
-Netlify, Schulserver, USB-Stick. Für GitHub Pages genügt `index.html` im
-Branch `main` mit „Deploy from a branch → main / (root)“.
+Rein statisch (HTML + JPG): GitHub Pages, Netlify, Schulserver, USB-Stick.
+Für GitHub Pages genügt `index.html` im Branch `main`
+(„Deploy from a branch → main / (root)“).

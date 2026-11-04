@@ -146,11 +146,29 @@ def zoom_out(view, steps=1):
             break
 
 
+
+def handle_reference():
+    """Referenzdialog beim Skizzieren auf einer fremden Flaeche."""
+    dlg = QtWidgets.QApplication.activeModalWidget()
+    log("Referenzdialog: %r" % (dlg,))
+    if dlg is None:
+        return
+    radio = dlg.findChild(QtWidgets.QRadioButton, "radioIndependent")
+    if radio is not None:
+        radio.setChecked(True)
+    pump(250)
+    shot("14_kopf_referenz", dlg)
+    for btn in dlg.findChildren(QtWidgets.QPushButton):
+        if btn.text().replace("&", "").strip() == "OK":
+            btn.click()
+            return
+    dlg.reject()
+
 # ------------------------------------------------------------------ Ablauf
 def run():
     try:
         mw = Gui.getMainWindow()
-        mw.resize(1500, 900)
+        mw.resize(1500, 844)
         mw.move(20, 20)
         mw.raise_()
         pump(900)
@@ -185,11 +203,14 @@ def run():
             combo.hidePopup()
             pump(300)
 
-        # --- 4: Koerper anlegen -----------------------------------------
-        body = doc.addObject("PartDesign::Body", "Body")
+        # --- 4: Koerper anlegen (echter FreeCAD-Befehl) -----------------
+        Gui.runCommand("PartDesign_Body")
+        pump(1400)
+        body = [o for o in doc.Objects if o.TypeId == "PartDesign::Body"][-1]
         body.Label = "Körper"
-        doc.recompute()
-        pump(800)
+        Gui.Selection.clearSelection()
+        Gui.Selection.addSelection(body)
+        pump(900)
         shot("04_neue_skizze")
 
         # --- 5: Befestigung auswaehlen (Task-Panel, kein Modal) ---------
@@ -320,7 +341,121 @@ def run():
         pump(700)
         shot("11_quader")
 
-        # --- 12: Ansicht drehen -----------------------------------------
+        # ================= Kopf als neuer Koerper ======================
+        # --- 12: neuer Koerper ------------------------------------------
+        Gui.Selection.clearSelection()
+        pump(500)
+        Gui.runCommand("PartDesign_Body")
+        pump(1500)
+        head_body = [o for o in doc.Objects
+                     if o.TypeId == "PartDesign::Body" and o is not body][-1]
+        head_body.Label = "Kopf"
+        Gui.Selection.clearSelection()
+        Gui.Selection.addSelection(head_body)
+        pump(900)
+        shot("12_kopf_body")
+
+        # --- 13: Deckflaeche auswaehlen ---------------------------------
+        top = None
+        for i, f in enumerate(body.Shape.Faces):
+            n = f.normalAt(0, 0)
+            c = f.CenterOfMass
+            if abs(n.z - 1.0) < 0.01 and abs(c.z - 10.0) < 0.01:
+                top = i + 1
+                break
+        log("Top-Face: %r" % top)
+        Gui.Selection.clearSelection()
+        Gui.Selection.addSelection(body, "Face%d" % top)
+        pump(700)
+        shot("13_kopf_flaeche")
+
+        # --- 14: Referenzdialog + Skizze --------------------------------
+        QtCore.QTimer.singleShot(1600, handle_reference)
+        Gui.runCommand("PartDesign_NewSketch")
+        pump(1600)
+        head = [o for o in head_body.Group if o.TypeId == "Sketcher::SketchObject"][0]
+        head.Label = "Kopfskizze"
+        try:
+            copy = doc.getObject("CopyBody")
+            if copy is not None:
+                copy.Label = "Bezugsfläche"
+                copy.ViewObject.Visibility = False
+        except Exception as exc:
+            log("CopyBody: %r" % (exc,))
+        if not Gui.activeDocument().getInEdit():
+            Gui.activeDocument().setEdit(head.Name)
+            pump(600)
+
+        # --- 15: Kopf-Rechteck 30 x 20 ----------------------------------
+        hp = [App.Vector(-15, -10, 0), App.Vector(15, -10, 0),
+              App.Vector(15, 10, 0), App.Vector(-15, 10, 0)]
+        for i in range(4):
+            head.addGeometry(Part.LineSegment(hp[i], hp[(i + 1) % 4]), False)
+        for i in range(4):
+            head.addConstraint(Sketcher.Constraint("Coincident", i, 2, (i + 1) % 4, 1))
+        head.addConstraint(Sketcher.Constraint("Horizontal", 0))
+        head.addConstraint(Sketcher.Constraint("Horizontal", 2))
+        head.addConstraint(Sketcher.Constraint("Vertical", 1))
+        head.addConstraint(Sketcher.Constraint("Vertical", 3))
+        head.addConstraint(Sketcher.Constraint("Symmetric", 0, 1, 2, 1, -1, 1))
+        doc.recompute()
+        pump(700)
+        view = Gui.activeDocument().activeView()
+        view.viewTop()
+        view.fitAll()
+        pump(700)
+        shot("15_kopf_rechteck")
+
+        head.addConstraint(Sketcher.Constraint("Distance", 2, 30.0))
+        head.addConstraint(Sketcher.Constraint("Distance", 1, 20.0))
+        doc.recompute()
+        pump(700)
+        view.viewTop()
+        view.fitAll()
+        pump(700)
+        shot("15_kopf_skizze")
+
+        # --- 16: Kopf aufpolstern ---------------------------------------
+        Gui.activeDocument().resetEdit()
+        pump(800)
+        hpad = head_body.newObject("PartDesign::Pad", "Pad001")
+        hpad.Label = "Aufpolsterung"
+        hpad.Profile = head
+        hpad.Length = 10.0
+        doc.recompute()
+        pump(800)
+        try:
+            head.ViewObject.Visibility = False
+        except Exception:
+            pass
+        view = Gui.activeDocument().activeView()
+        view.setCameraType("Perspective")
+        view.viewIsometric()
+        view.fitAll()
+        zoom_out(view, 1)
+        try:
+            Gui.activeDocument().setEdit(hpad.Name)
+            pump(1600)
+        except Exception as exc:
+            log("Kopf-Pad-Edit: %r" % (exc,))
+        shot("16_kopf_pad")
+        try:
+            Gui.activeDocument().resetEdit()
+        except Exception:
+            pass
+        pump(800)
+
+        # --- 17: Ergebnis: Sockel + Kopf --------------------------------
+        view = Gui.activeDocument().activeView()
+        view.setCameraType("Perspective")
+        view.viewIsometric()
+        view.fitAll()
+        zoom_out(view, 1)
+        Gui.Selection.clearSelection()
+        pump(800)
+        shot("17_kopf_fertig")
+
+        # --- 18: Ansicht drehen -----------------------------------------
         try:
             rotation = App.Rotation(App.Vector(0, 0, 1), 28)
             view.setCameraOrientation(rotation.multiply(view.getCameraOrientation()))
@@ -330,9 +465,9 @@ def run():
             pump(400)
         except Exception as exc:
             log("Ansicht: %r" % (exc,))
-        shot("12_ansicht")
+        shot("18_kopf_ansicht")
 
-        # --- 13: Speichern ----------------------------------------------
+        # --- 19: Speichern ----------------------------------------------
         doc.saveAs(TMP_DOC)
         pump(900)
         action = menu_by_text("Datei")
@@ -345,13 +480,13 @@ def run():
             popup = QtWidgets.QApplication.activePopupWidget()
             log("Datei-Popup: %r" % (popup,))
             if popup is not None:
-                shot("13_speichern", popup)
+                shot("19_speichern", popup)
                 popup.close()
             else:
-                shot("13_speichern")
+                shot("19_speichern")
             pump(300)
         else:
-            shot("13_speichern")
+            shot("19_speichern")
 
         log("FERTIG")
     except Exception:
