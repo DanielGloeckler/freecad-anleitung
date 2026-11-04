@@ -1,38 +1,55 @@
-# FreeCAD-Grundkurs – interaktive Anleitung
+# FreeCAD-Grundkurs – 13 Schritte mit echten Screenshots
 
 **Live:** <https://danielgloeckler.github.io/freecad-anleitung/>
 
-Eine einzelne HTML-Seite, die das FreeCAD-Fenster simuliert: Man klickt sich durch
-13 Schritte – vom leeren Dokument bis zum fertigen Quader 50 × 40 × 10 mm.
-Keine Installation, keine Internetverbindung, keine externen Dateien.
+Eine statische HTML-Seite, die Schritt für Schritt durch ein einfaches
+Part-Design-Bauteil führt: vom leeren Dokument zum Quader **50 × 40 × 10 mm**.
+Jeder Schritt zeigt einen **echten Screenshot aus FreeCAD 1.1** (dunkles Theme) –
+keine Nachbauten, keine Platzhalter, keine externen Bibliotheken.
 
 ## Benutzen
 
-`index.html` im Browser öffnen. Fertig.
+`index.html` im Browser öffnen – fertig.
 
-- **Orange markierte Elemente** im simulierten FreeCAD-Fenster anklicken –
-  oder den **Weiter**-Button rechts benutzen.
-- Der Fortschritt wird lokal im Browser gespeichert (`localStorage`).
-- **Icon-Legende** (oben rechts) erklärt alle Werkzeuge mit Tastenkürzel.
+- **Weiter / Zurück** rechts, die Schrittliste links oder die Pfeiltasten `←` `→`
+- **Bild anklicken** (oder „Bild groß“) → Vollbild, mit `←` `→` durch die Schritte
+- Fortschritt wird lokal gespeichert (`localStorage`), „Neu starten“ setzt zurück
 - Direktlink auf einen Schritt: `index.html?schritt=6`
-- Direktlink auf die Abschlussseite: `index.html?schritt=fertig`
-- `index.html#legende` öffnet die Icon-Legende.
+- Direktlink auf das Ende: `index.html?schritt=fertig`
 
-## Inhalt
+## Die Schritte
 
-1. Neues Dokument
-2. Arbeitsbereich Part Design
-3. Neuer Körper
-4. Neue Skizze
-5. XY-Ebene wählen
-6. Rechteck zentriert zeichnen
-7. Bemaßung 50 mm
-8. Bemaßung 40 mm
-9. Skizze schließen
-10. Aufpolstern
-11. Höhe 10 mm + OK
-12. Ansicht & Navigation
-13. Speichern & Ausblick
+| # | Schritt | Screenshot |
+|---|---|---|
+| 1 | Neues Dokument | Startseite / „Leere Datei“ |
+| 2 | Arbeitsbereich Part Design | aufgeklappte Arbeitsbereich-Liste |
+| 3 | Neuer Körper | leeres Dokument, Panel „Start Part“ |
+| 4 | Neue Skizze | Körper + „Hilfswerkzeuge“ |
+| 5 | XY-Ebene wählen | Dialog „Befestigung auswählen“ |
+| 6 | Rechteck zentriert | Skizze mit Randbedingungen (2 Freiheitsgrade) |
+| 7 | Bemaßung 50 mm | 1 Freiheitsgrad |
+| 8 | Bemaßung 40 mm | grün, „Vollständig bestimmt“ |
+| 9 | Skizze schließen | Drahtmodell in der Isometrie |
+| 10 | Aufpolstern | Parameter + grüne Vorschau |
+| 11 | Höhe 10 mm | fertiger Quader |
+| 12 | Ansicht & Navigation | gedrehte Ansicht, NaviCube |
+| 13 | Speichern | Datei-Menü mit „Speichern“ |
+
+## Screenshots neu erzeugen
+
+Die Bilder in `assets/` wurden mit **FreeCAD 1.1.4** und
+`tools/erzeuge_screenshots.py` aufgenommen. Das Skript baut das Modell per
+Python-API, öffnet die echten Dialoge und fotografiert das komplette
+FreeCAD-Fenster (`QWidget.grab`, inkl. Popups/Menüs).
+
+```
+"D:\Programm\FreeCAD 1.1\bin\freecad.exe" tools\erzeuge_screenshots.py
+```
+
+- Das FreeCAD-Fenster wird dafür kurz auf 1500 × 900 gesetzt.
+- Das Skript schließt das Dokument am Ende ohne Speichern.
+- Ergebnisse: `assets/01_start.jpg` … `assets/13_speichern.jpg`
+- Voraussetzung: FreeCAD 1.1 mit dunklem Theme und deutscher Oberfläche.
 
 ## Anpassen
 
@@ -40,25 +57,16 @@ Alles steckt in `index.html`:
 
 | Was | Wo |
 |---|---|
-| Texte der Schritte | `<script>` → `STEPS` (Titel, Lead, Bullets, Tipps, Statuszeile) |
-| Icon-Liste der Legende | `<script>` → `ICONS` |
-| Icons | `<svg><defs>` oben im Dokument (`#i-…`) |
+| Texte der Schritte | `<script>` → `STEPS` (Titel, Lead, Bullets, Tipps, Bildpfad, Bildunterschrift) |
+| Startbild / Abschlussbild | `STEPS[…].img` bzw. `FINAL_IMG` |
 | Farben / Layout | CSS-Variablen in `:root` |
+| Fortschritts-Speicherung | Konstante `KEY` |
 
-Ein Schritt braucht mindestens `short`, `title`, `section`, `lead`, `bullets`,
-`target` (CSS-Selektor des klickbaren Elements) und `status`.
-`calloutOn` verschiebt die Sprechblase auf ein anderes Element, `tip` und `warn`
-sind optionale Merkkästen.
+Ein Schritt braucht `short`, `title`, `section`, `img`, `alt`, `caption`,
+`lead` und `bullets`; `tip`, `warn` und `keys` sind optional.
 
 ## Hosting
 
-Die Seite ist statisch und läuft überall: GitHub Pages, Netlify, Schulserver,
-USB-Stick. Für GitHub Pages genügt es, `index.html` im Branch `main` zu haben
-und Pages auf „Deploy from a branch → main / (root)“ zu stellen.
-
-## Hinweis
-
-Die FreeCAD-Oberfläche ist nachgebaut, keine echten Screenshots. Die Begriffe
-entsprechen der deutschen FreeCAD-1.x-Oberfläche (Part Design, Aufpolstern,
-Befestigung auswählen …). Maße und Reihenfolge folgen dem Grundkurs
-„Quader erstellen“.
+Die Seite ist rein statisch (HTML + JPG) und läuft überall: GitHub Pages,
+Netlify, Schulserver, USB-Stick. Für GitHub Pages genügt `index.html` im
+Branch `main` mit „Deploy from a branch → main / (root)“.

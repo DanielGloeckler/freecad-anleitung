@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>FreeCAD-Grundkurs – interaktive Anleitung</title>
+<title>FreeCAD-Grundkurs – 13 Schritte mit echten Screenshots</title>
 <style>
 :root{
-  --bg:#121519; --bg2:#191d22; --panel:#23282e; --panel2:#2b3138; --line:#333b45;
-  --text:#e7ebf0; --muted:#98a3b0; --accent:#5b9bd5; --accent2:#82c0f5;
+  --bg:#121519; --panel:#1a1f24; --line:#333b45;
+  --text:#e7ebf0; --muted:#96a1ae; --accent:#5b9bd5; --accent2:#82c0f5;
   --orange:#f0a83c; --green:#4cd07d; --red:#e06c5a;
   --mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
 }
@@ -22,8 +22,8 @@ body{
 }
 button{font:inherit;color:inherit}
 .ico{width:1.15em;height:1.15em;vertical-align:-0.22em;flex:none}
-.mono{font-family:var(--mono)}
 .muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
 
 /* ---------- Kopfzeile ---------- */
 header.top{
@@ -33,13 +33,12 @@ header.top{
 .brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.2px;white-space:nowrap}
 .brand .logo{width:28px;height:28px}
 .brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
-.progresswrap{flex:1;display:flex;align-items:center;gap:12px;max-width:560px;min-width:90px}
+.progresswrap{flex:1;display:flex;align-items:center;gap:12px;max-width:520px;min-width:90px}
 .progress{flex:1;height:6px;background:#2a313a;border-radius:99px;overflow:hidden}
 .progress i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#427cb8,#82c0f5);transition:width .35s ease}
 .progressnum{font:600 12px var(--mono);color:var(--muted);white-space:nowrap}
 .top-actions{display:flex;gap:8px;margin-left:auto}
 
-/* ---------- Buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#262c33;
   padding:8px 13px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;white-space:nowrap;
@@ -50,14 +49,10 @@ header.top{
 .btn.ghost{background:transparent}
 .btn:disabled{opacity:.35;cursor:default}
 .btn.small{padding:5px 10px;font-size:12px;border-radius:6px}
-.btn.wide{width:100%;justify-content:center}
 
 /* ---------- Layout ---------- */
-.app{flex:1;display:grid;grid-template-columns:224px minmax(0,1fr) 382px;min-height:0}
-.outline{
-  border-right:1px solid var(--line);background:rgba(23,26,31,.72);
-  padding:16px 10px 24px;overflow:auto;
-}
+.app{flex:1;display:grid;grid-template-columns:232px minmax(0,1fr) 392px;min-height:0}
+.outline{border-right:1px solid var(--line);background:rgba(23,26,31,.72);padding:16px 10px 24px;overflow:auto}
 .outline h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:2px 8px 10px}
 .steplist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
 .stepitem{
@@ -76,190 +71,42 @@ header.top{
 .stepitem .t{font-size:12.5px;line-height:1.25}
 .outline .foot{font-size:11px;color:#6d7884;margin:18px 8px 0;line-height:1.5}
 
-/* ---------- Bühne ---------- */
+/* ---------- Bildbühne ---------- */
 .stage{
-  position:relative;display:flex;align-items:center;justify-content:center;
-  padding:18px;overflow:auto;min-width:0;
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:22px 26px;overflow:auto;min-width:0;gap:10px;
 }
 .stage::before{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(700px 380px at 50% 45%,rgba(91,155,213,.07),transparent 70%);
+  background:radial-gradient(760px 420px at 50% 42%,rgba(91,155,213,.08),transparent 70%);
 }
-.mockwrap{position:relative;flex:none}
-.fcwin{
-  position:absolute;top:0;left:0;width:1000px;height:620px;transform-origin:top left;
-  background:#2b2b2b;border:1px solid #0d0f11;border-radius:9px;overflow:hidden;
-  display:flex;flex-direction:column;color:#d6d6d6;font-size:12px;
-  box-shadow:0 26px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;
+.shot{
+  position:relative;margin:0;width:100%;max-width:1120px;
+  border:1px solid #2f3944;border-radius:10px;overflow:hidden;cursor:zoom-in;
+  box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.03) inset;
+  background:#0d1013;
 }
-.menubar{display:flex;gap:15px;padding:5px 11px;background:#2f2f2f;border-bottom:1px solid #191919;font-size:11.5px;color:#bdbdbd;flex:none}
-.menubar .right{margin-left:auto;color:#7e7e7e}
-.wbrow{display:flex;align-items:center;gap:8px;padding:6px 9px;background:#303030;border-bottom:1px solid #1d1d1d;position:relative;z-index:12;flex:none}
-.wbselect{display:flex;align-items:center;gap:8px;background:#3a3a3a;border:1px solid #4c4c4c;color:#ececec;border-radius:5px;padding:5px 10px;min-width:176px}
-.wbselect .ico{width:18px;height:18px}
-.wbselect .chev{width:9px;height:9px;margin-left:auto;opacity:.7}
-.wbdrop{
-  position:absolute;top:calc(100% + 1px);left:9px;background:#333;border:1px solid #565656;border-radius:6px;
-  box-shadow:0 14px 34px rgba(0,0,0,.55);padding:4px;display:none;z-index:40;min-width:190px;
+.shot img{display:block;width:100%;height:auto;transition:opacity .22s ease}
+.shot .zoom{
+  position:absolute;right:10px;bottom:10px;background:rgba(12,16,20,.82);border:1px solid #43505e;
+  color:#dbe4ee;font-size:11.5px;padding:5px 9px;border-radius:6px;display:flex;gap:6px;align-items:center;
+  opacity:0;transition:.18s;backdrop-filter:blur(4px);
 }
-#fcwin[data-p="1"] .wbdrop{display:block;animation:pop .18s ease}
-@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-.wb-item{display:flex;gap:8px;align-items:center;width:100%;padding:6px 11px;background:none;border:0;color:#ddd;border-radius:4px;text-align:left;cursor:pointer}
-.wb-item:hover{background:#4a6f96;color:#fff}
-
-.toolbar{display:flex;align-items:center;gap:3px;padding:4px 8px;background:#333;border-bottom:1px solid #1d1d1d;min-height:38px;flex:none}
-.tbgroup{display:flex;align-items:center;gap:3px}
-.tb-spacer{flex:1}
-.tool{
-  width:29px;height:29px;display:grid;place-items:center;background:none;border:1px solid transparent;border-radius:4px;
-  cursor:pointer;position:relative;padding:0;transition:.12s;
+.shot:hover .zoom{opacity:1}
+.shot-cap{
+  font-size:11.5px;color:#7f8b98;text-align:center;max-width:900px;margin:0;
 }
-.tool .ico{width:19px;height:19px}
-.tool:hover{background:#464646;border-color:#5b5b5b}
-.tool.active{background:#4a6f96;border-color:#6d9dcb}
-.tool::after{
-  content:attr(data-tip);position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%) translateY(-4px);
-  background:#111;color:#eee;font-size:10.5px;line-height:1.3;white-space:nowrap;padding:4px 8px;border-radius:4px;
-  border:1px solid #444;opacity:0;pointer-events:none;transition:.13s;z-index:60;
-}
-.tool:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
-.sep{width:1px;height:19px;background:#4a4a4a;margin:0 4px}
-
-.tabsrow{display:flex;background:#2a2a2a;border-bottom:1px solid #1a1a1a;font-size:11.5px;flex:none}
-.tab{padding:5px 14px;border-right:1px solid #1a1a1a;color:#b9b9b9;background:#303030;display:flex;gap:7px;align-items:center}
-.tab.active{background:#3c3c3c;color:#fff}
-.tab .x{opacity:.45;font-size:10px}
-.tab .star{color:#e0b040;font-weight:700}
-
-.fcbody{display:flex;flex:1;min-height:0}
-.dock-title{
-  display:flex;align-items:center;gap:6px;height:22px;padding:0 7px;background:#303030;
-  border-bottom:1px solid #1a1a1a;font-size:10.5px;color:#bdbdbd;flex:none;
-}
-.dock-title .dock-actions{margin-left:auto;letter-spacing:3px;color:#7a7a7a;font-size:9px}
-.dock-tab{background:#3a3a3a;padding:2px 9px;border-radius:3px 3px 0 0;color:#ddd}
-.tree{width:186px;flex:none;background:#292929;border-right:1px solid #1a1a1a;display:flex;flex-direction:column;overflow:hidden}
-.tree-scroll{overflow:auto;padding:5px 3px;font-size:11.5px}
-.tree-row{display:flex;align-items:center;gap:6px;padding:3px 6px;border-radius:3px;white-space:nowrap;color:#d0d0d0;overflow:hidden;text-overflow:ellipsis}
-.tree-row .ico{width:13px;height:13px}
-.tree-row.lvl1{padding-left:14px}
-.tree-row.lvl2{padding-left:30px}
-.tree-row.lvl3{padding-left:46px}
-.tree-row.muted{color:#8d949c}
-.tree-row.active{background:#3c5f80;color:#fff}
-.tree-row.active.body{background:#2f4f2f;color:#a7e6a7}
-.tree-empty{padding:10px 8px;color:#7d848c;font-size:11px;line-height:1.5}
-.tree-row .star{color:#e0b040;margin-left:2px}
-
-.viewer{flex:1;position:relative;background:#2e2e2e;min-width:0;overflow:hidden}
-#scene{position:absolute;inset:0;width:100%;height:100%}
-.layer{opacity:0;transition:opacity .35s ease}
-.layer.show{opacity:1}
-.geo{fill:none;stroke:#e8e8e8;stroke-width:2.2}
-#scene.full .geo{stroke:#4bd37b;filter:drop-shadow(0 0 5px rgba(75,211,123,.35))}
-#gSolid.preview{opacity:.5}
-#fcwin[data-p="0"] .badge-tl{display:none}
-.startpage{
-  position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  text-align:center;color:#c9c9c9;background:linear-gradient(160deg,#31353a,#26282b);
-}
-.startpage.show{display:flex}
-.startpage .sp-logo{width:64px;height:64px;opacity:.65}
-.startpage h3{margin:6px 0 0;font-size:17px;font-weight:600;color:#e6e6e6}
-.startpage p{margin:0;font-size:11.5px;color:#9a9a9a}
-.startpage kbd{font:600 10px var(--mono);background:#3a3a3a;border:1px solid #555;border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:#ddd}
-
-.navcube{position:absolute;top:8px;right:10px;width:88px;height:88px;cursor:pointer;opacity:.92;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
-.navcube:hover{opacity:1}
-#fcwin[data-p="0"] .navcube{display:none}
-.axiswidget{position:absolute;right:12px;bottom:10px;width:56px;height:56px;opacity:.85}
-.viewer .badge-tl{
-  position:absolute;top:10px;left:12px;font-size:10.5px;color:#b9c2cc;background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.07);padding:3px 8px;border-radius:99px;
-}
-.navhelp{
-  position:absolute;left:12px;bottom:12px;display:none;flex-direction:column;gap:4px;
-  background:rgba(15,18,22,.86);border:1px solid #3c4753;border-radius:8px;padding:8px 11px;
-  font-size:10.5px;color:#c6d0da;backdrop-filter:blur(4px);
-}
-.navhelp.show{display:flex;animation:pop .25s ease}
-.navhelp b{color:#fff}
-.navhelp .ico{width:14px;height:14px}
-
-.tasks{width:256px;flex:none;background:#2c2c2c;border-left:1px solid #1a1a1a;display:flex;flex-direction:column;overflow:hidden}
-.tasks-scroll{overflow:auto;padding:6px;display:flex;flex-direction:column;gap:6px}
-.panel{background:#333;border:1px solid #454545;border-radius:3px;overflow:hidden}
-.panel-head{display:flex;align-items:center;gap:6px;padding:5px 8px;background:#3d3d3d;font-weight:600;font-size:11px;color:#e4e4e4}
-.panel-head .ico{width:14px;height:14px}
-.panel-head .chev{margin-left:auto;opacity:.6;font-size:9px}
-.panel-body{padding:6px 8px;font-size:11px;color:#c9c9c9;line-height:1.5}
-.task-title{font-size:11.5px;font-weight:600;color:#e8e8e8;padding:2px 2px 0}
-.link{
-  display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:2px 0;
-  color:#8ec5f0;text-decoration:underline;cursor:pointer;font-size:11.5px;text-align:left;
-}
-.link:hover{color:#c3e3ff}
-.link .ico{width:14px;height:14px}
-.link.disabled{color:#7c7c7c;text-decoration:none;cursor:default}
-.panel-note{font-size:10.5px;color:#98a2ad;padding:2px 3px;line-height:1.45}
-
-.listbox{border:1px solid #4a4a4a;background:#2a2a2a;margin:6px 8px 0;border-radius:2px;overflow:hidden}
-.listrow{padding:3px 7px;font-size:11px;color:#d0d0d0;white-space:nowrap}
-.listrow.selected{background:#3c5f80;color:#fff}
-.dlg-actions{display:flex;gap:6px;justify-content:flex-end;padding:7px 8px}
-.badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:99px;background:#3d4650;color:#c9d4df;margin-left:6px}
-.badge.ok{background:#24462f;color:#7fe0a2}
-.smalllist{list-style:none;margin:0;padding:0;font-size:10.5px;color:#c3c3c3;display:flex;flex-direction:column;gap:2px}
-.elrow{font-size:10.5px;color:#c3c3c3;padding:1px 0}
-.form{display:flex;flex-direction:column;gap:6px}
-.fld{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#c9c9c9}
-.fld span{width:52px;flex:none}
-.fld input{flex:1;background:#242424;border:1px solid #555;color:#eee;border-radius:3px;padding:3px 6px;font:inherit;min-width:0}
-.chk{display:flex;align-items:center;gap:6px;font-size:10.5px;color:#c9c9c9}
-
-.statusbar{display:flex;align-items:center;gap:14px;padding:3px 10px;background:#262626;border-top:1px solid #1a1a1a;font-size:10.5px;color:#a8a8a8;min-height:24px;flex:none}
-.statusbar .push{margin-left:auto;color:#7d7d7d}
-
-/* ---------- Hervorhebung ---------- */
-.hl{
-  position:relative;z-index:55;border-radius:6px;
-  box-shadow:0 0 0 2px rgba(240,168,60,.95),0 0 16px 3px rgba(240,168,60,.45);
-  animation:pulse 1.6s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 2px rgba(240,168,60,.95),0 0 10px 2px rgba(240,168,60,.3)}
-  50%{box-shadow:0 0 0 3px rgba(240,168,60,1),0 0 24px 7px rgba(240,168,60,.55)}
-}
-.callout{
-  position:absolute;z-index:70;transform:translateX(-50%);display:none;
-  background:var(--orange);color:#231705;font-weight:700;font-size:11px;padding:5px 10px;border-radius:6px;
-  box-shadow:0 8px 22px rgba(0,0,0,.45);white-space:nowrap;pointer-events:none;
-  animation:bob 1.7s ease-in-out infinite;
-}
-.callout.show{display:block}
-.callout::before{
-  content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);
-  border:6px solid transparent;border-bottom-color:var(--orange);border-top:0;
-}
-.callout.above::before{border-bottom:0;border-top:6px solid var(--orange);top:auto;bottom:-6px}
-@keyframes bob{0%,100%{margin-top:0}50%{margin-top:4px}}
+.shot-cap b{color:#b9c4d0;font-weight:600}
 
 /* ---------- Lesebereich ---------- */
-.reader{
-  border-left:1px solid var(--line);background:linear-gradient(180deg,#1a1e23,#15181c);
-  overflow:auto;padding:22px 24px 44px;scroll-behavior:smooth;
-}
-.reader-inner{max-width:340px}
+.reader{border-left:1px solid var(--line);background:linear-gradient(180deg,#1a1e23,#15181c);overflow:auto;padding:22px 24px 44px}
+.reader-inner{max-width:344px}
 .kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:700}
 .reader h2{font-size:23px;line-height:1.25;margin:7px 0 10px;letter-spacing:-.01em}
 .lead{color:#c3ccd6;font-size:13.5px;margin:0 0 16px}
 .bullets{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:10px}
 .bullets li{position:relative;padding-left:24px;color:#d7dee6;font-size:13.5px}
 .bullets li::before{content:"";position:absolute;left:5px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.bullets li .ico{
-  width:19px;height:19px;vertical-align:-5px;margin:0 2px;background:#2f353c;border:1px solid #4a545f;
-  border-radius:4px;padding:1px;
-}
 .note{border-radius:10px;padding:11px 13px;margin:0 0 12px;font-size:12.5px;border:1px solid;line-height:1.5}
 .note b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.11em;margin-bottom:3px}
 .note p{margin:0;color:#c9d2db}
@@ -272,9 +119,8 @@ kbd{
   font:600 11px var(--mono);background:#232930;border:1px solid #46505b;border-bottom-width:2px;
   border-radius:4px;padding:2px 6px;color:#e3e9ef;
 }
-.mouselegend{font-size:11px;color:#7f8b97;margin:0 0 16px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-.advance-hint{font-size:11px;color:#6f7a86;margin-top:10px;line-height:1.45}
+.advance-hint{font-size:11px;color:#6f7a86;margin-top:10px;line-height:1.45;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 h3{font-size:13px;letter-spacing:.02em;margin:22px 0 8px;color:#e9eef4}
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 18px}
 .specs div{background:#20262d;border:1px solid #333c45;border-radius:10px;padding:9px 10px}
@@ -291,41 +137,43 @@ table.shortcuts td:first-child{width:52%}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chip{font-size:11.5px;border:1px solid #3a444f;background:#20262c;color:#c2ccd7;border-radius:99px;padding:4px 10px}
 
-/* ---------- Dialog ---------- */
-dialog#legend{
-  width:min(760px,92vw);max-height:84vh;border:1px solid #39434e;border-radius:14px;padding:0;
-  background:#171b20;color:var(--text);box-shadow:0 30px 80px rgba(0,0,0,.65);
+/* ---------- Lightbox ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:rgba(5,8,12,.9);backdrop-filter:blur(4px);padding:24px;
 }
-dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
-.dlg-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #2b333c}
-.dlg-head h2{margin:0;font-size:17px}
-.dlg-head .btn{margin-left:auto}
-.legend-body{padding:16px 20px 22px;overflow:auto;max-height:calc(84vh - 62px)}
-.legend-body>p{margin:0 0 14px;font-size:12.5px;color:var(--muted)}
-.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.legend-item{display:flex;gap:11px;padding:10px;background:#1e242a;border:1px solid #303943;border-radius:10px}
-.legend-item .ico{width:26px;height:26px;flex:none;margin-top:1px}
-.legend-item h4{margin:0;font-size:12.5px;font-weight:650}
-.legend-item p{margin:2px 0 0;font-size:11.5px;color:var(--muted);line-height:1.4}
-.key{font:600 10px var(--mono);color:#9fb0c0;background:#2a323a;border:1px solid #3d4853;border-radius:4px;padding:1px 5px;margin-left:4px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:96vw;max-height:88vh;border-radius:6px;box-shadow:0 30px 90px rgba(0,0,0,.8)}
+.lb-close{
+  position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid #3f4a56;
+  background:rgba(20,25,31,.85);color:#dfe7ef;font-size:18px;cursor:pointer;
+}
+.lb-close:hover{background:#2c3640}
+.lb-nav{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;
+  background:rgba(18,22,27,.92);border:1px solid #36414c;border-radius:99px;padding:5px 8px;font-size:12px;color:#b9c4cf;
+}
+.lb-nav button{width:34px;height:34px;border-radius:50%;border:0;background:#2a333c;color:#e8eef5;cursor:pointer;font-size:15px}
+.lb-nav button:hover{background:#3a4652}
+.lb-nav span{min-width:70px;text-align:center}
 
 /* ---------- Responsiv ---------- */
-@media (max-width:1320px){
-  .app{grid-template-columns:206px minmax(0,1fr) 360px}
+@media (max-width:1360px){
+  .app{grid-template-columns:212px minmax(0,1fr) 366px}
   .reader{padding:20px 18px 40px}
 }
-@media (max-width:1100px){
-  .app{grid-template-columns:minmax(0,1fr) 350px}
+@media (max-width:1120px){
+  .app{grid-template-columns:minmax(0,1fr) 356px}
   .outline{display:none}
 }
-@media (max-width:880px){
+@media (max-width:900px){
   body{overflow:auto}
-  .app{grid-template-columns:1fr;grid-template-rows:minmax(420px,58vh) auto}
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .stage{padding:14px;min-height:0}
   .reader{border-left:0;border-top:1px solid var(--line);overflow:visible;padding:20px 18px 60px}
-  .stage{padding:12px;justify-content:flex-start}
   .brand small{display:none}
-  .top-actions .btn span.lbl{display:none}
-  .legend-grid{grid-template-columns:1fr}
+  .top-actions .btn .lbl{display:none}
+  .shot .zoom{opacity:1}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -334,156 +182,22 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
 </head>
 <body>
 
-<!-- ===================== ICONS ===================== -->
-<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-<defs>
-  <symbol id="i-doc" viewBox="0 0 24 24">
-    <path d="M4.5 2.5h9.2L19 7.8V19a2 2 0 0 1-2 2H4.5a2 2 0 0 1-2-2V4.5a2 2 0 0 1 2-2Z" fill="#e9e9e9"/>
-    <path d="M13.7 2.5V7a1 1 0 0 0 1 1H19Z" fill="#bdbdbd"/>
-    <circle cx="17.2" cy="17.2" r="5.4" fill="#2f7d32" stroke="#a5d6a7" stroke-width="1"/>
-    <path d="M17.2 14.4v5.6M14.4 17.2h5.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="i-folder" viewBox="0 0 24 24">
-    <path d="M3 7a2 2 0 0 1 2-2h4.2l1.8 2H19a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="#e6b955"/>
-    <path d="M3 9.5h18V17.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="#f0c766"/>
-    <path d="M3 9.5h18" stroke="#c99a33" stroke-width=".8"/>
-  </symbol>
-  <symbol id="i-save" viewBox="0 0 24 24">
-    <path d="M4 3h13l4 4v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" fill="#3f7fbf"/>
-    <rect x="7" y="4" width="9" height="6" rx="1" fill="#e8eef5"/>
-    <rect x="7" y="13" width="11" height="7" rx="1" fill="#e8eef5"/>
-    <rect x="9" y="14.5" width="7" height="2" fill="#8aa8c4"/>
-  </symbol>
-  <symbol id="i-partdesign" viewBox="0 0 24 24">
-    <path d="M12 2.2 21 7.3v9.4L12 21.8 3 16.7V7.3Z" fill="#2f5f96"/>
-    <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="#79aede"/>
-    <path d="M12 12.4v9.4L3 16.7V7.3Z" fill="#24476f"/>
-    <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="none" stroke="#1b3350" stroke-width=".7"/>
-  </symbol>
-  <symbol id="i-body" viewBox="0 0 24 24">
-    <path d="M12 3 20 7.5v9L12 21l-8-4.5v-9Z" fill="#3a6ea5"/>
-    <path d="M12 3 20 7.5 12 12 4 7.5Z" fill="#8dbde8"/>
-    <path d="M12 12v9l-8-4.5v-9Z" fill="#2a5580"/>
-  </symbol>
-  <symbol id="i-origin" viewBox="0 0 24 24">
-    <path d="M12 12V3" stroke="#5ecf6b" stroke-width="1.8" stroke-linecap="round"/>
-    <path d="M12 12h9" stroke="#e05a52" stroke-width="1.8" stroke-linecap="round"/>
-    <path d="M12 12 5 19" stroke="#5a9bd5" stroke-width="1.8" stroke-linecap="round"/>
-    <circle cx="12" cy="12" r="1.9" fill="#eee"/>
-  </symbol>
-  <symbol id="i-plane" viewBox="0 0 24 24">
-    <path d="M3 15 12 6l9 3-9 9Z" fill="#7d93ad" opacity=".85"/>
-    <path d="M3 15 12 6l9 3-9 9Z" fill="none" stroke="#c8d6e4" stroke-width="1.1"/>
-  </symbol>
-  <symbol id="i-sketch" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="12.5" height="12.5" rx="1" fill="#f2f2f2" stroke="#d0453f" stroke-width="1.6"/>
-    <path d="M13 20.5 20.5 13l2 2L15 22.5l-2.6.6Z" fill="#e2c15a" stroke="#8a6d1e" stroke-width=".8"/>
-    <path d="M20.5 13l2 2" stroke="#8a6d1e" stroke-width="1.4"/>
-  </symbol>
-  <symbol id="i-rect" viewBox="0 0 24 24">
-    <rect x="4" y="6.5" width="16" height="11" fill="none" stroke="#e8e8e8" stroke-width="1.6"/>
-    <circle cx="4" cy="6.5" r="1.9" fill="#d9534f"/>
-    <circle cx="20" cy="6.5" r="1.9" fill="#d9534f"/>
-    <circle cx="4" cy="17.5" r="1.9" fill="#d9534f"/>
-    <circle cx="20" cy="17.5" r="1.9" fill="#d9534f"/>
-  </symbol>
-  <symbol id="i-rect-center" viewBox="0 0 24 24">
-    <rect x="3" y="5.5" width="18" height="13" fill="none" stroke="#e8e8e8" stroke-width="1.6"/>
-    <circle cx="12" cy="12" r="2.3" fill="none" stroke="#d9534f" stroke-width="1.6"/>
-    <path d="M12 8.4v7.2M8.4 12h7.2" stroke="#d9534f" stroke-width="1.2"/>
-  </symbol>
-  <symbol id="i-constraint" viewBox="0 0 24 24">
-    <path d="M8.5 3.5v17" stroke="#d9534f" stroke-width="2" stroke-linecap="round"/>
-    <path d="M8.5 7.5H16M8.5 16.5H16" stroke="#d9534f" stroke-width="1.6"/>
-    <path d="M16 5 19.5 7.5 16 10" fill="none" stroke="#d9534f" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M16 14 19.5 16.5 16 19" fill="none" stroke="#d9534f" stroke-width="1.6" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-dim" viewBox="0 0 24 24">
-    <path d="M4 6v12M20 6v12M4 12h16" stroke="#e0a33c" stroke-width="1.4"/>
-    <path d="M4 12l3.6-2.6v5.2ZM20 12l-3.6-2.6v5.2Z" fill="#e0a33c"/>
-  </symbol>
-  <symbol id="i-dim-v" viewBox="0 0 24 24">
-    <path d="M6 4h12M6 20h12M12 4v16" stroke="#e0a33c" stroke-width="1.4"/>
-    <path d="M12 4 9.4 7.6h5.2ZM12 20l-2.6-3.6h5.2Z" fill="#e0a33c"/>
-  </symbol>
-  <symbol id="i-close" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="18" height="18" rx="3.5" fill="#2f7d32"/>
-    <path d="M7.5 12.5 10.5 15.5 16.5 8.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-pad" viewBox="0 0 24 24">
-    <path d="M12 5.5 19 9.4v8.2L12 21.5 5 17.6V9.4Z" fill="#3a6ea5"/>
-    <path d="M12 5.5 19 9.4 12 13.3 5 9.4Z" fill="#8dbde8"/>
-    <path d="M12 13.3v8.2L5 17.6V9.4Z" fill="#2a5580"/>
-    <path d="M17.5 9.5V2.5M17.5 2.5 15 5.2M17.5 2.5l2.5 2.7" stroke="#6ee36e" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-pocket" viewBox="0 0 24 24">
-    <path d="M12 3.5 20 8v8.5L12 21l-8-4.5V8Z" fill="#3a6ea5"/>
-    <path d="M12 3.5 20 8 12 12.5 4 8Z" fill="#8dbde8"/>
-    <path d="M12 12.5V21L4 16.5V8Z" fill="#2a5580"/>
-    <path d="M12 5.5v7M12 12.5 9.4 9.4M12 12.5l2.6-3.1" stroke="#e06c5a" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-revolve" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="6.3" fill="none" stroke="#8dbde8" stroke-width="1.5" stroke-dasharray="2 3"/>
-    <path d="M12 2.5v19" stroke="#5ecf6b" stroke-width="1.3"/>
-    <path d="M4.5 9.5A8 8 0 0 1 18 6.5" fill="none" stroke="#e0a33c" stroke-width="1.8" stroke-linecap="round"/>
-    <path d="M18 3.2 18.8 7l-3.6-.9Z" fill="#e0a33c"/>
-  </symbol>
-  <symbol id="i-iso" viewBox="0 0 24 24">
-    <path d="M12 4 19 8v8l-7 4-7-4V8Z" fill="none" stroke="#cfd8e3" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M5 8l7 4 7-4M12 12v8" fill="none" stroke="#cfd8e3" stroke-width="1.1"/>
-  </symbol>
-  <symbol id="i-fit" viewBox="0 0 24 24">
-    <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="#cfd8e3" stroke-width="1.8" stroke-linecap="round"/>
-    <rect x="8.5" y="8.5" width="7" height="7" fill="none" stroke="#5b9bd5" stroke-width="1.3"/>
-  </symbol>
-  <symbol id="i-eye" viewBox="0 0 24 24">
-    <path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12Z" fill="none" stroke="#aab6c2" stroke-width="1.5"/>
-    <circle cx="12" cy="12" r="2.6" fill="#aab6c2"/>
-  </symbol>
-  <symbol id="i-check" viewBox="0 0 24 24">
-    <path d="M4 12.5 9 17.5 20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24">
-    <path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-reset" viewBox="0 0 24 24">
-    <path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="i-help" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/>
-    <path d="M9.4 9.2a2.7 2.7 0 1 1 4 2.4c-.9.6-1.4 1.2-1.4 2.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    <circle cx="12" cy="17.3" r="1.1" fill="currentColor"/>
-  </symbol>
-  <symbol id="i-mouse" viewBox="0 0 24 24">
-    <rect x="7" y="2.5" width="10" height="19" rx="5" fill="none" stroke="#cfd8e3" stroke-width="1.6"/>
-    <path d="M12 3v6" stroke="#cfd8e3" stroke-width="1.6"/>
-    <path d="M9.5 6.5h5" stroke="#cfd8e3" stroke-width="1.2"/>
-  </symbol>
-  <symbol id="i-warn" viewBox="0 0 24 24">
-    <path d="M12 3 22 20H2Z" fill="#5a4126" stroke="#f0b05a" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M12 9v5" stroke="#f0b05a" stroke-width="1.8" stroke-linecap="round"/>
-    <circle cx="12" cy="17" r="1" fill="#f0b05a"/>
-  </symbol>
-  <symbol id="i-bulb" viewBox="0 0 24 24">
-    <path d="M9 18h6M10 21h4" stroke="#6fd69a" stroke-width="1.7" stroke-linecap="round"/>
-    <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" fill="#1d3a29" stroke="#6fd69a" stroke-width="1.5"/>
-  </symbol>
-</defs>
-</svg>
-
 <header class="top">
   <div class="brand">
-    <svg class="logo"><use href="#i-partdesign"/></svg>
-    <div>FreeCAD-Grundkurs<small>Interaktive Schritt-für-Schritt-Anleitung</small></div>
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.2 21 7.3v9.4L12 21.8 3 16.7V7.3Z" fill="#2f5f96"/>
+      <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="#79aede"/>
+      <path d="M12 12.4v9.4L3 16.7V7.3Z" fill="#24476f"/>
+    </svg>
+    <div>FreeCAD-Grundkurs<small>13 Schritte · echte Screenshots aus FreeCAD 1.1</small></div>
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
     <span class="progressnum" id="progressNum">1 / 13</span>
   </div>
   <div class="top-actions">
-    <button class="btn ghost" id="legendBtn"><svg class="ico"><use href="#i-help"/></svg><span class="lbl">Icon-Legende</span></button>
-    <button class="btn ghost" id="resetBtn"><svg class="ico"><use href="#i-reset"/></svg><span class="lbl">Neu starten</span></button>
+    <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
+    <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
 
@@ -491,209 +205,29 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
   <nav class="outline">
     <h2>Schritte</h2>
     <ol class="steplist" id="steplist"></ol>
-    <p class="foot">Klicke einen Schritt an, um zu springen.<br>Dein Fortschritt wird lokal gespeichert.</p>
+    <p class="foot">Alle Bilder sind echte Screenshots aus FreeCAD 1.1 (dunkles Theme).<br><br>Klicke einen Schritt an, um zu springen. Fortschritt wird lokal gespeichert.</p>
   </nav>
 
   <main class="stage" id="stage">
-    <div class="mockwrap" id="mockwrap">
-      <div class="fcwin" id="fcwin" data-p="0">
-        <div class="menubar">
-          <span>Datei</span><span>Bearbeiten</span><span>Ansicht</span><span>Werkzeuge</span><span>Hilfe</span>
-          <span class="right">FreeCAD 1.1 · Simulation</span>
-        </div>
-
-        <div class="wbrow">
-          <div class="wbselect">
-            <svg class="ico"><use id="wbUse" href="#i-doc"/></svg>
-            <span id="wbLabel">Start</span>
-            <svg class="chev"><use href="#i-chev"/></svg>
-          </div>
-          <div class="wbdrop">
-            <button class="wb-item" data-act="wb-partdesign"><svg class="ico" style="width:17px;height:17px"><use href="#i-partdesign"/></svg>Part Design</button>
-            <button class="wb-item" data-act="wb-sketcher"><svg class="ico" style="width:17px;height:17px"><use href="#i-sketch"/></svg>Sketcher</button>
-            <button class="wb-item" data-act="wb-part"><svg class="ico" style="width:17px;height:17px"><use href="#i-body"/></svg>Part</button>
-            <button class="wb-item" data-act="wb-techdraw"><svg class="ico" style="width:17px;height:17px"><use href="#i-dim"/></svg>TechDraw</button>
-            <button class="wb-item" data-act="wb-start"><svg class="ico" style="width:17px;height:17px"><use href="#i-doc"/></svg>Start</button>
-          </div>
-        </div>
-
-        <div class="toolbar">
-          <button class="tool" data-act="new" data-tip="Neues Dokument (Strg+N)"><svg class="ico"><use href="#i-doc"/></svg></button>
-          <button class="tool" data-act="open" data-tip="Öffnen (Strg+O)"><svg class="ico"><use href="#i-folder"/></svg></button>
-          <button class="tool" data-act="save" data-tip="Speichern (Strg+S)"><svg class="ico"><use href="#i-save"/></svg></button>
-          <span class="sep"></span>
-          <div class="tbgroup" id="tbPD" hidden>
-            <button class="tool" data-act="body" data-tip="Neuen Körper erstellen"><svg class="ico"><use href="#i-body"/></svg></button>
-            <button class="tool" data-act="sketch" data-tip="Neue Skizze"><svg class="ico"><use href="#i-sketch"/></svg></button>
-            <span class="sep"></span>
-            <button class="tool" data-act="pad" data-tip="Aufpolstern (Pad) – Skizze zum Volumen"><svg class="ico"><use href="#i-pad"/></svg></button>
-            <button class="tool" data-act="pocket" data-tip="Tasche (Pocket) – Ausschnitt"><svg class="ico"><use href="#i-pocket"/></svg></button>
-            <button class="tool" data-act="revolve" data-tip="Drehen (Revolution)"><svg class="ico"><use href="#i-revolve"/></svg></button>
-          </div>
-          <div class="tbgroup" id="tbSketch" hidden>
-            <button class="tool" data-act="rect" data-tip="Rechteck (zwei Eckpunkte)"><svg class="ico"><use href="#i-rect"/></svg></button>
-            <button class="tool" data-act="rect-center" data-tip="Zentriertes Rechteck"><svg class="ico"><use href="#i-rect-center"/></svg></button>
-            <button class="tool" data-act="constraint" data-tip="Randbedingung (horizontal, vertikal, symmetrisch …)"><svg class="ico"><use href="#i-constraint"/></svg></button>
-            <button class="tool" data-act="dim-h" data-tip="Bemaßung horizontal"><svg class="ico"><use href="#i-dim"/></svg></button>
-            <button class="tool" data-act="dim-v" data-tip="Bemaßung vertikal"><svg class="ico"><use href="#i-dim-v"/></svg></button>
-            <span class="sep"></span>
-            <button class="tool" data-act="close-sketch" data-tip="Skizze schließen"><svg class="ico"><use href="#i-close"/></svg></button>
-          </div>
-          <span class="tb-spacer"></span>
-          <button class="tool" data-act="iso" data-tip="Isometrische Ansicht"><svg class="ico"><use href="#i-iso"/></svg></button>
-          <button class="tool" data-act="fit" data-tip="Alles einpassen"><svg class="ico"><use href="#i-fit"/></svg></button>
-        </div>
-
-        <div class="tabsrow">
-          <div class="tab" id="tabStart">Start</div>
-          <div class="tab active" id="tabDoc" hidden>
-            <span id="tabName">Unbenannt</span>
-            <span class="star" id="tabStar">*</span>
-            <span class="x">✕</span>
-          </div>
-        </div>
-
-        <div class="fcbody">
-          <div class="tree">
-            <div class="dock-title"><span class="dock-tab">Modell</span></div>
-            <div class="tree-scroll" id="treeScroll"></div>
-          </div>
-
-          <div class="viewer">
-            <svg id="scene" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" aria-label="3D-Ansicht">
-              <defs>
-                <pattern id="gridPat" width="22" height="22" patternUnits="userSpaceOnUse">
-                  <path d="M22 0H0V22" fill="none" stroke="#3a3a3a" stroke-width="0.7"/>
-                </pattern>
-                <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                  <path d="M0 0 10 5 0 10Z" fill="#e0534f"/>
-                </marker>
-              </defs>
-
-              <g id="gGrid" class="layer">
-                <rect width="800" height="520" fill="url(#gridPat)"/>
-              </g>
-
-              <g id="gAxes" class="layer">
-                <line x1="40" y1="280" x2="760" y2="280" stroke="#c94a42" stroke-width="1.4"/>
-                <line x1="400" y1="30" x2="400" y2="490" stroke="#3f9c4a" stroke-width="1.4"/>
-                <text x="766" y="284" fill="#c94a42" font-size="12" font-family="Segoe UI, sans-serif">X</text>
-                <text x="406" y="34" fill="#3f9c4a" font-size="12" font-family="Segoe UI, sans-serif">Y</text>
-                <circle cx="400" cy="280" r="3" fill="#f2f2f2" stroke="#c94a42" stroke-width="1.2"/>
-              </g>
-
-              <g id="gRect" class="layer">
-                <rect class="geo" x="290" y="192" width="220" height="176"/>
-                <g stroke="#e0534f" fill="none" stroke-width="1.4">
-                  <path d="M400 280 290 192" stroke-dasharray="3 4" opacity=".85" marker-end="url(#arrowRed)"/>
-                  <path d="M400 280 510 192" stroke-dasharray="3 4" opacity=".85" marker-end="url(#arrowRed)"/>
-                  <path d="M400 280 290 368" stroke-dasharray="3 4" opacity=".85" marker-end="url(#arrowRed)"/>
-                  <path d="M400 280 510 368" stroke-dasharray="3 4" opacity=".85" marker-end="url(#arrowRed)"/>
-                  <path d="M388 185h24M388 375h24M283 268v24M517 268v24" stroke-width="2"/>
-                </g>
-                <circle cx="400" cy="280" r="3.2" fill="#fff" stroke="#e0534f" stroke-width="1.4"/>
-              </g>
-
-              <g id="gDimH" class="layer">
-                <path d="M290 188v-38M510 188v-38" stroke="#c9c9c9" stroke-opacity=".55"/>
-                <path d="M290 150h220" stroke="#f08a72" stroke-width="1.6"/>
-                <path d="M290 150l12-4.5v9ZM510 150l-12-4.5v9Z" fill="#f08a72"/>
-                <text x="400" y="140" text-anchor="middle" fill="#ff9d86" font-size="17" font-family="Segoe UI, sans-serif">50 mm</text>
-              </g>
-
-              <g id="gDimV" class="layer">
-                <path d="M514 192h38M514 368h38" stroke="#c9c9c9" stroke-opacity=".55"/>
-                <path d="M540 192v176" stroke="#f08a72" stroke-width="1.6"/>
-                <path d="M540 192l-4.5 12h9ZM540 368l-4.5-12h9Z" fill="#f08a72"/>
-                <text x="556" y="286" fill="#ff9d86" font-size="17" font-family="Segoe UI, sans-serif">40 mm</text>
-              </g>
-
-              <g id="gIsoSketch" class="layer">
-                <polygon points="382.7,210 555.9,310 417.3,390 244.1,290"
-                         fill="#5b9bd5" fill-opacity=".16" stroke="#7fb6e8" stroke-width="1.8" stroke-dasharray="6 4"/>
-              </g>
-
-              <g id="gSolid" class="layer">
-                <polygon points="382.7,170 555.9,270 417.3,350 244.1,250" fill="#d7dee7"/>
-                <polygon points="244.1,250 417.3,350 417.3,390 244.1,290" fill="#93a3b5"/>
-                <polygon points="417.3,350 555.9,270 555.9,310 417.3,390" fill="#7b8c9e"/>
-                <g fill="none" stroke="#38465a" stroke-width="1.3" stroke-linejoin="round">
-                  <polygon points="382.7,170 555.9,270 417.3,350 244.1,250"/>
-                  <path d="M555.9,270v40M417.3,350v40M244.1,250v40"/>
-                  <path d="M382.7,210 555.9,310 417.3,390 244.1,290Z"/>
-                </g>
-              </g>
-            </svg>
-
-            <div class="startpage" id="startPage">
-              <svg class="sp-logo"><use href="#i-partdesign"/></svg>
-              <h3>FreeCAD 1.1</h3>
-              <p>Kein Dokument geöffnet</p>
-              <p>Starte mit <kbd>Strg</kbd>+<kbd>N</kbd> oder dem Symbol „Neues Dokument“.</p>
-            </div>
-
-            <div class="badge-tl" id="viewBadge">3D-Ansicht</div>
-
-            <svg class="navcube" id="navcube" data-act="navcube" tabindex="0" role="button" aria-label="NaviCube – Ansicht drehen">
-              <g stroke="#59636f" stroke-width="1">
-                <polygon points="48,22 86,40 48,58 10,40" fill="#3d3d3d"/>
-                <polygon points="10,40 48,58 48,88 10,70" fill="#323232"/>
-                <polygon points="86,40 48,58 48,88 86,70" fill="#2a2a2a"/>
-              </g>
-              <text x="48" y="44" text-anchor="middle" font-size="8" fill="#c2c2c2" font-family="Segoe UI, sans-serif">OBEN</text>
-              <path d="M48 10 40 18h16Z" fill="#8b96a3"/>
-            </svg>
-
-            <div class="axiswidget" aria-hidden="true">
-              <svg viewBox="0 0 58 58">
-                <path d="M29 29V8" stroke="#5ecf6b" stroke-width="1.6"/>
-                <text x="33" y="9" fill="#5ecf6b" font-size="7" font-family="Segoe UI, sans-serif">y</text>
-                <path d="M29 29h22" stroke="#e05a52" stroke-width="1.6"/>
-                <text x="52" y="32" fill="#e05a52" font-size="7" font-family="Segoe UI, sans-serif">x</text>
-                <path d="M29 29 15 44" stroke="#5a9bd5" stroke-width="1.6"/>
-                <text x="9" y="49" fill="#5a9bd5" font-size="7" font-family="Segoe UI, sans-serif">z</text>
-              </svg>
-            </div>
-
-            <div class="navhelp" id="navHelp">
-              <div><svg class="ico"><use href="#i-mouse"/></svg> <b>Mausrad</b> = zoomen</div>
-              <div><b>Rechts ziehen</b> = drehen (je nach Navigationsstil)</div>
-              <div><b>NaviCube</b> = Ansicht exakt ausrichten</div>
-            </div>
-          </div>
-
-          <div class="tasks">
-            <div class="dock-title">
-              <span class="dock-tab">Aufgaben</span>
-              <span class="dock-actions">▣ ▢ ✕</span>
-            </div>
-            <div class="tasks-scroll" id="tasksScroll"></div>
-          </div>
-        </div>
-
-        <div class="statusbar">
-          <span id="statusText">Bereit</span>
-          <span class="push" id="unitLabel">Start · mm</span>
-        </div>
-      </div>
-
-      <div class="callout" id="callout"><span id="calloutText">Hier klicken</span></div>
-    </div>
+    <figure class="shot" id="shot">
+      <img id="shotImg" src="assets/01_start.jpg" alt="FreeCAD 1.1 – Startseite">
+      <span class="zoom">⤢ vergrößern</span>
+    </figure>
+    <p class="shot-cap" id="shotCap"><b>Echter Screenshot</b> · FreeCAD 1.1</p>
   </main>
 
   <aside class="reader" id="reader"></aside>
 </div>
 
-<dialog id="legend">
-  <div class="dlg-head">
-    <h2>Icon-Legende</h2>
-    <button class="btn ghost" data-close>Schließen</button>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Schließen">✕</button>
+  <img id="lbImg" alt="Screenshot in groß">
+  <div class="lb-nav">
+    <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
+    <span id="lbCaption">1 / 13</span>
+    <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
-  <div class="legend-body">
-    <p>Alle Werkzeuge aus dem Kurs – mit Kurzbeschreibung und Tastenkürzel.</p>
-    <div class="legend-grid" id="legendGrid"></div>
-  </div>
-</dialog>
+</div>
 
 <script>
 (function(){
@@ -701,223 +235,210 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
 
   var $  = function(sel, root){ return (root||document).querySelector(sel); };
   var $$ = function(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); };
+  var N;
 
   /* =====================================================================
-     INHALTE – hier kannst du Texte, Schritte und Ziele anpassen
+     INHALTE – hier Texte austauschen
      ===================================================================== */
-  var IC = function(name){ return '<svg class="ico" aria-hidden="true"><use href="#i-'+name+'"/></svg>'; };
-  var M1 = '<kbd>M1</kbd>';
-  var M2 = '<kbd>M2</kbd>';
-
   var STEPS = [
     {
       short:'Neues Dokument', title:'Neues Dokument anlegen', section:'Grundlage',
-      target:'[data-act="new"]', callout:'Hier klicken',
-      lead:'Alles beginnt mit einer leeren Datei. FreeCAD legt ein neues Dokument mit dem Namen „Unbenannt“ an.',
+      img:'assets/01_start.jpg',
+      alt:'FreeCAD 1.1 Startseite mit Neue-Datei-Kacheln und zuletzt verwendeten Dateien',
+      caption:'Startseite von FreeCAD 1.1 mit der Kachel „Leere Datei“',
+      lead:'Beim Start zeigt FreeCAD die Startseite. Von hier aus legst du ein neues, leeres Dokument an.',
       bullets:[
-        'Klicke in der Symbolleiste auf '+IC('doc')+' <b>Neues Dokument</b>.',
-        'Alternativ: Menü <b>Datei → Neu</b> oder <kbd>Strg</kbd>+<kbd>N</kbd>.',
-        'Unten erscheint der Tab <b>Unbenannt</b>, links der noch leere <b>Modellbaum</b>.'
+        'Klicke auf die Kachel <b>Leere Datei</b> – oder drücke <kbd>Strg</kbd>+<kbd>N</kbd>.',
+        'FreeCAD öffnet einen neuen Tab mit dem Dokument <b>Unbenannt</b>.',
+        'Links erscheint der leere <b>Modellbaum</b>, rechts das Panel <b>Aufgaben</b>.'
       ],
-      tip:'Beim ersten Start zeigt FreeCAD die Startseite. Die kannst du getrost schließen – wichtig ist nur das neue, leere Dokument.',
-      keys:['Strg','N'],
-      status:'Kein Dokument geöffnet'
+      tip:'Die Startseite kannst du unten mit „Diese Startseite nicht mehr anzeigen“ abschalten. Dann startet FreeCAD direkt mit einem leeren Dokument.',
+      keys:['Strg','N']
     },
     {
       short:'Arbeitsbereich Part Design', title:'Arbeitsbereich „Part Design“ wählen', section:'Grundlage',
-      target:'[data-act="wb-partdesign"]', callout:'Part Design wählen',
-      lead:'FreeCAD ist modular: Jeder Arbeitsbereich bringt seine eigenen Werkzeuge mit. Für Bauteile aus Skizzen ist Part Design zuständig.',
+      img:'assets/02_arbeitsbereich.jpg',
+      alt:'Aufgeklappte Arbeitsbereich-Auswahl in FreeCAD mit dem Eintrag Part Design',
+      caption:'Die Arbeitsbereich-Auswahl oben links – hier steht bereits „Part Design“',
+      lead:'FreeCAD ist modular aufgebaut. Jeder Arbeitsbereich bringt seine eigenen Werkzeuge mit – für Bauteile aus Skizzen ist Part Design zuständig.',
       bullets:[
-        'Die Auswahlliste oben zeigt noch <b>Start</b>. Klicke sie an.',
-        'Wähle <b>Part Design</b> aus der Liste. Die Symbolleiste wechselt zu den Part-Design-Werkzeugen.',
-        'Der Modellbaum bleibt leer – der Arbeitsbereich ändert nur die Werkzeuge.'
+        'Öffne oben links die Auswahlliste <b>Part Design</b>.',
+        'Wähle <b>Part Design</b> aus der Liste.',
+        'Die Symbolleisten wechseln zu den Part-Design-Werkzeugen. Der Modellbaum bleibt leer.'
       ],
       tip:'Part Design arbeitet parametrisch: Du zeichnest eine Skizze und formst daraus einen 3D-Körper. Änderst du später eine Zahl, rechnet FreeCAD das Modell neu.',
-      warn:'Andere Bereiche wie Sketcher, Part oder TechDraw brauchst du erst später. Für dieses Tutorial bleibt Part Design aktiv.',
-      status:'Dokument: Unbenannt · Arbeitsbereich: Start'
+      warn:'In der Liste stehen viele Arbeitsbereiche (Draft, FEM, Mesh …). Für diesen Kurs brauchst du nur Part Design und kurz Sketcher.'
     },
     {
       short:'Neuer Körper', title:'Neuen Körper erstellen', section:'Part Design',
-      target:'[data-act="body"]', calloutOn:'#tasksScroll [data-act="body"]', callout:'Neuer Körper',
+      img:'assets/03_neuer_koerper.jpg',
+      alt:'Leeres FreeCAD-Dokument mit dem Aufgaben-Panel Start Part und dem Eintrag Neuer Körper',
+      caption:'Leeres Dokument, Panel „Start Part“ mit „Neuer Körper“',
       lead:'Ein Körper (Body) ist der Container für dein Bauteil. Er bringt seinen Ursprung mit drei Ebenen gleich mit.',
       bullets:[
-        'Im Panel <b>Aufgaben</b> rechts: Bereich <b>Start Part</b> → <b>Neuer Körper</b>.',
-        'Im Modellbaum erscheint '+IC('body')+' <b>Körper</b> mit '+IC('origin')+' <b>Ursprung</b> (XY-, XZ- und YZ-Ebene).',
+        'Im Panel <b>Aufgaben</b> rechts auf <b>Neuer Körper</b> klicken.',
+        'Im Modellbaum erscheint <b>Körper</b> mit dem <b>Ursprung</b> (XY-, XZ- und YZ-Ebene).',
         'Der Körper ist jetzt aktiv – alles Neue landet automatisch darin.'
       ],
-      tip:'Ein Bauteil = ein Körper. Skizzen, Aufpolstern und Taschen liegen immer in genau einem Körper. Der aktive Körper ist hervorgehoben.',
-      status:'Arbeitsbereich: Part Design'
+      tip:'Ein Bauteil = ein Körper. Skizzen, Aufpolstern und Taschen liegen immer in genau einem Körper.',
+      warn:'Ist kein Körper aktiv, bleiben die Part-Design-Werkzeuge grau. Dann im Modellbaum auf „Körper“ doppelklicken.'
     },
     {
       short:'Neue Skizze', title:'Neue Skizze erstellen', section:'Part Design',
-      target:'[data-act="sketch"]', calloutOn:'#tasksScroll [data-act="sketch"]', callout:'Neue Skizze',
+      img:'assets/04_neue_skizze.jpg',
+      alt:'FreeCAD mit angelegtem Körper und dem Aufgaben-Panel Hilfswerkzeuge, darin Neue Skizze',
+      caption:'Körper angelegt – unter „Hilfswerkzeuge“ wartet „Neue Skizze“',
       lead:'Jetzt entsteht die 2D-Zeichnung, aus der später der Quader wird.',
       bullets:[
         'Im Panel Aufgaben unter <b>Hilfswerkzeuge</b> auf <b>Neue Skizze</b> klicken.',
-        'Es öffnet sich der Dialog <b>Befestigung auswählen</b> – dort legst du die Ebene der Skizze fest.'
+        'FreeCAD öffnet den Dialog <b>Befestigung auswählen</b> – dort legst du die Ebene der Skizze fest.',
+        'Der Körper bleibt dabei aktiv (grün hervorgehoben).'
       ],
       tip:'Eine Skizze ist eine flache Zeichnung. Erst durch Aufpolstern (oder Drehen) wird daraus ein Volumen.',
-      warn:'Die Skizze muss in einem aktiven Körper liegen. Ist der Körper nicht aktiv, bleiben die Skizzen-Werkzeuge grau.',
-      status:'Körper aktiv – keine Skizze'
+      warn:'Die Skizze muss in einem aktiven Körper liegen. Sonst bleiben die Skizzen-Werkzeuge grau.'
     },
     {
       short:'XY-Ebene wählen', title:'XY-Ebene auswählen', section:'Part Design',
-      target:'[data-act="attach-ok"]', callout:'XY wählen, dann OK',
+      img:'assets/05_xy_ebene.jpg',
+      alt:'Dialog Befestigung auswählen mit den Ebenen XY, XZ und YZ sowie OK und Abbrechen',
+      caption:'Dialog „Befestigung auswählen“ mit den drei Basisebenen',
       lead:'Die Skizze braucht eine Ebene. Für einen Quader, der nach oben wächst, ist die XY-Ebene richtig.',
       bullets:[
-        'Im Dialog <b>Befestigung auswählen</b> die '+IC('plane')+' <b>XY-Ebene (Basis-Ebene)</b> markieren.',
-        'Mit <b>OK</b> bestätigen.',
+        'Im Dialog <b>Befestigung auswählen</b> die <b>XY-Ebene (Basis-Ebene)</b> markieren.',
+        'Oben rechts mit <b>OK</b> bestätigen.',
         'Die Ansicht springt senkrecht auf die Ebene: Du siehst die rote X- und die grüne Y-Achse.'
       ],
-      tip:'XY = Draufsicht von oben, XZ = Vorderansicht, YZ = Seitenansicht. Die Wahl bestimmt nur die Lage der Zeichenebene – ändern kannst du sie später immer noch.',
-      status:'Befestigung auswählen …'
+      tip:'XY = Draufsicht von oben, XZ = Vorderansicht, YZ = Seitenansicht. Die Wahl bestimmt nur die Lage der Zeichenebene.',
+      warn:'Die Häkchen „Verwendete Elemente zulassen“ und „Externe Formelemente“ bleiben aus – für dieses einfache Rechteck brauchst du sie nicht.'
     },
     {
       short:'Rechteck zeichnen', title:'Rechteck zentriert zeichnen', section:'Skizze',
-      target:'[data-act="rect-center"]', callout:'Zentriertes Rechteck',
-      lead:'Das Rechteck wird um den Ursprung zentriert – so bleibt das Bauteil symmetrisch und lässt sich später leichter ändern.',
+      img:'assets/06_rechteck.jpg',
+      alt:'Skizzenmodus in FreeCAD mit weißem Rechteck, roten Randbedingungen und 2 Freiheitsgraden',
+      caption:'Rechteck mit Randbedingungen – 2 Freiheitsgrade, noch ohne Maße',
+      lead:'Das Rechteck wird um den Ursprung zentriert – so bleibt das Bauteil symmetrisch und lässt sich später leicht ändern.',
       bullets:[
-        'Werkzeug '+IC('rect-center')+' <b>Zentriertes Rechteck</b> wählen (im Aufklappmenü des Rechteck-Werkzeugs).',
-        'Maus auf den <b>Ursprung</b> (Schnittpunkt der Achsen) führen – der Punkt springt gelb ein. '+M1+' klicken.',
-        'Nach außen aufziehen und mit '+M1+' den Eckpunkt setzen.',
-        M2+' oder <kbd>Esc</kbd> beendet den Befehl.'
+        'Werkzeug <b>Zentriertes Rechteck</b> wählen (im Aufklappmenü des Rechteck-Werkzeugs).',
+        'Maus auf den <b>Ursprung</b> (Schnittpunkt der Achsen) führen – der Punkt springt gelb ein, <kbd>M1</kbd> klicken.',
+        'Nach außen aufziehen und mit <kbd>M1</kbd> den Eckpunkt setzen.',
+        '<kbd>M2</kbd> oder <kbd>Esc</kbd> beendet den Befehl.'
       ],
       tip:'Die roten Symbole an den Kanten sind Randbedingungen: horizontal, vertikal und symmetrisch zum Ursprung. Sie halten das Rechteck in Form, ohne Maße vorzugeben.',
       warn:'Achte darauf, dass der erste Klick wirklich auf dem Ursprung landet (gelber Fangpunkt). Sonst steht das Rechteck schief.',
-      status:'Skizze wird bearbeitet – 0 Elemente'
+      keys:['Esc']
     },
     {
       short:'Bemaßung 50 mm', title:'Breite bemaßen: 50 mm', section:'Skizze',
-      target:'[data-act="dim-h"]', callout:'Bemaßung horizontal',
+      img:'assets/07_bemassung_50.jpg',
+      alt:'FreeCAD-Skizze mit 50-mm-Bemaßung und einem Freiheitsgrad',
+      caption:'Nach der 50-mm-Bemaßung: nur noch 1 Freiheitsgrad',
       lead:'Jetzt bekommt das Rechteck eine feste Breite.',
       bullets:[
-        'Werkzeug '+IC('dim')+' <b>Bemaßung</b> wählen.',
-        'Die <b>obere horizontale Kante</b> mit '+M1+' anklicken.',
-        'Maus nach oben ziehen und mit '+M1+' den Maßpunkt setzen.',
+        'Werkzeug <b>Bemaßung</b> wählen.',
+        'Die <b>obere horizontale Kante</b> mit <kbd>M1</kbd> anklicken.',
+        'Maus nach oben ziehen und mit <kbd>M1</kbd> den Maßpunkt setzen.',
         'Im Dialog <b>50 mm</b> eintragen und mit <kbd>Enter</kbd> bestätigen.'
       ],
       tip:'Bemaßungen sind der einzige Weg, eine Skizze eindeutig festzulegen. Eine geänderte Zahl aktualisiert das gesamte Bauteil.',
-      warn:'Der Bemaßungsbefehl bleibt aktiv. Mit <kbd>Esc</kbd> beenden, sonst bemaßt du versehentlich weiter.',
-      status:'Rechteck erstellt – 2 Freiheitsgrade'
+      warn:'Der Bemaßungsbefehl bleibt aktiv. Mit <kbd>Esc</kbd> beenden, sonst bemaßt du versehentlich weiter.'
     },
     {
       short:'Bemaßung 40 mm', title:'Höhe bemaßen: 40 mm', section:'Skizze',
-      target:'[data-act="dim-v"]', callout:'Bemaßung vertikal',
-      lead:'Die Höhe fehlt noch – dann ist die Skizze vollständig bestimmt.',
+      img:'assets/08_bemassung_40.jpg',
+      alt:'Vollständig bestimmte Skizze: grüne Linien, Maße 50 und 40 mm, Panel zeigt Vollständig bestimmt',
+      caption:'Vollständig bestimmt: grüne Linien, 0 Freiheitsgrade',
+      lead:'Die Höhe fehlt noch – danach ist die Skizze vollständig bestimmt.',
       bullets:[
-        'Werkzeug '+IC('dim-v')+' <b>Vertikale Bemaßung</b> wählen.',
-        'Die <b>rechte vertikale Kante</b> anklicken, nach rechts ziehen, '+M1+' setzen.',
+        'Werkzeug <b>Vertikale Bemaßung</b> wählen.',
+        'Die <b>rechte vertikale Kante</b> anklicken, nach rechts ziehen, <kbd>M1</kbd> setzen.',
         '<b>40 mm</b> eintragen und bestätigen.',
-        'Die Linien werden <b>grün</b>: Die Skizze ist vollständig bestimmt.'
+        'Die Linien werden <b>grün</b>, im Panel steht <b>Vollständig bestimmt</b>.'
       ],
       tip:'Weiß = noch beweglich (freie Freiheitsgrade). Grün = alles festgelegt. Eine Skizze ohne Freiheitsgrade ist das Ziel.',
-      status:'Bemaßung 50 mm – 1 Freiheitsgrad'
+      warn:'Bleibt die Skizze weiß, fehlt noch ein Maß oder eine Randbedingung. Die Statuszeile bzw. das Panel zeigt die Anzahl der Freiheitsgrade.'
     },
     {
       short:'Skizze schließen', title:'Skizze schließen', section:'Skizze',
-      target:'[data-act="close-sketch"]', calloutOn:'#tasksScroll [data-act="close-sketch"]', callout:'Skizze schließen',
+      img:'assets/09_skizze_geschlossen.jpg',
+      alt:'3D-Ansicht nach dem Schließen der Skizze: weißes Rechteck im Raum, Modellbaum mit Körper und Skizze',
+      caption:'Skizze geschlossen – die Zeichnung liegt jetzt im 3D-Raum',
       lead:'Die 2D-Zeichnung ist fertig – zurück in den 3D-Bereich.',
       bullets:[
-        'Auf <b>Skizze schließen</b> klicken (oben rechts im Panel oder in der Symbolleiste).',
-        'Die Ansicht dreht zurück in die Isometrie. Im Modellbaum steht die Skizze jetzt unter dem Körper.',
-        'Die Skizze bleibt erhalten: Doppelklick im Modellbaum öffnet sie jederzeit wieder.'
+        'Oben rechts im Panel auf <b>Schließen</b> klicken – oder das Werkzeug <b>Skizze schließen</b> in der Symbolleiste.',
+        'Die Ansicht dreht zurück in die Isometrie.',
+        'Im Modellbaum steht die Skizze jetzt unterhalb des Körpers.'
       ],
-      tip:'Auch eine nicht ganz grüne Skizze lässt sich aufpolstern. Nur später ändern wird dann mühsam, weil die Form noch verschoben werden kann.',
-      status:'Skizze vollständig bestimmt – 0 Freiheitsgrade'
+      tip:'Bearbeiten kannst du sie jederzeit per Doppelklick auf „Skizze“ im Modellbaum. Sie bleibt vollständig erhalten.',
+      warn:'Eine nicht ganz grüne Skizze lässt sich ebenfalls aufpolstern – nur spätere Änderungen werden dann mühsam.'
     },
     {
       short:'Aufpolstern', title:'Aufpolstern (Pad)', section:'3D-Körper',
-      target:'[data-act="pad"]', callout:'Aufpolstern',
+      img:'assets/10_aufpolstern.jpg',
+      alt:'Dialog Parameter der Aufpolsterung mit Tiefe 10 mm und grüner Vorschau des Quaders',
+      caption:'Parameter der Aufpolsterung: Tiefe 10 mm, Vorschau im 3D-Fenster',
       lead:'Aus der flachen Skizze wird ein 3D-Körper.',
       bullets:[
-        'Werkzeug '+IC('pad')+' <b>Aufpolstern</b> (englisch <i>Pad</i>) wählen.',
-        'FreeCAD zeigt eine Vorschau des Volumens und öffnet rechts die Parameter.'
+        'Werkzeug <b>Aufpolstern</b> (englisch <i>Pad</i>) wählen.',
+        'Rechts öffnet sich das Panel <b>Parameter der Aufpolsterung</b>.',
+        'Im 3D-Fenster zeigt FreeCAD eine grüne Vorschau des Volumens.'
       ],
       tip:'Aufpolstern zieht die Skizze senkrecht nach oben. Das Gegenstück ist die Tasche (Pocket): Sie schneidet nach innen.',
-      warn:'Werkzeuge sind grau, wenn kein Körper aktiv ist. Dann im Modellbaum auf <b>Körper</b> doppelklicken.',
-      status:'Skizze geschlossen'
+      warn:'Werkzeuge sind grau, wenn kein Körper aktiv ist. Dann im Modellbaum auf „Körper“ doppelklicken.'
     },
     {
       short:'Höhe 10 mm', title:'Höhe 10 mm eintragen und bestätigen', section:'3D-Körper',
-      target:'[data-act="pad-ok"]', callout:'10 mm eintragen, dann OK',
+      img:'assets/11_quader.jpg',
+      alt:'Fertiger Quader 50 x 40 x 10 mm in der Isometrie, Modellbaum zeigt Aufpolstern',
+      caption:'Fertig: Quader 50 × 40 × 10 mm',
       lead:'Höhe festlegen und bestätigen – der Quader ist fertig.',
       bullets:[
-        'Im Feld <b>Länge</b> den Wert <b>10 mm</b> eintragen.',
-        'Mit <b>OK</b> bestätigen.',
-        'Im Modellbaum erscheint <b>Aufpolstern</b>. Das Ergebnis: <b>50 × 40 × 10 mm</b>.'
+        'Im Feld <b>Tiefe</b> den Wert <b>10,00 mm</b> eintragen.',
+        'Mit <b>OK</b> oben rechts bestätigen.',
+        'Im Modellbaum erscheint <b>Aufpolster</b>. Das Ergebnis: <b>50 × 40 × 10 mm</b>.'
       ],
-      tip:'Doppelklick auf „Aufpolstern“ im Modellbaum öffnet die Parameter wieder – so änderst du die Höhe jederzeit.',
-      status:'Aufpolstern-Parameter'
+      tip:'Doppelklick auf „Aufpolster“ im Modellbaum öffnet die Parameter wieder – so änderst du die Höhe jederzeit.',
+      keys:['Enter']
     },
     {
       short:'Ansicht & Navigation', title:'Ergebnis ansehen und navigieren', section:'3D-Körper',
-      target:'[data-act="navcube"]', callout:'NaviCube: Ansicht drehen',
+      img:'assets/12_ansicht.jpg',
+      alt:'Quader aus einer anderen Richtung, NaviCube oben rechts zeigt RECHTS',
+      caption:'Ansicht gedreht – der NaviCube oben rechts zeigt die Blickrichtung',
       lead:'Fertig! Jetzt das Ergebnis ansehen und die Navigation üben.',
       bullets:[
-        IC('iso')+' <b>Isometrisch</b> zeigt das Bauteil schräg von vorn oben.',
         '<b>Mausrad</b> = zoomen.',
-        'Ansicht drehen: auf den <b>NaviCube</b> oben rechts klicken (Flächen und Pfeile) – oder mit gedrückter rechter Maustaste ziehen, je nach eingestelltem Navigationsstil.',
-        IC('fit')+' <b>Alles einpassen</b> holt das Modell zurück ins Bild.'
+        'Ansicht drehen: <b>NaviCube</b> oben rechts anklicken (Flächen und Pfeile) – oder mit gedrückter rechter Maustaste ziehen, je nach Navigationsstil.',
+        'Mit <b>Alles einpassen</b> holst du das Modell zurück ins Bild.',
+        'Die Standardansichten (Isometrisch, Vorne, Oben …) findest du im Menü <b>Ansicht</b>.'
       ],
       tip:'Der NaviCube zeigt OBEN, VORNE und RECHTS – ein Klick auf eine Fläche richtet die Ansicht exakt aus. Das ist die schnellste Art zu navigieren.',
-      warn:'Modell verschwunden? Nicht suchen, sondern „Alles einpassen“ klicken. Meist ist die Ansicht nur weit weggezoomt.',
-      status:'Aufpolstern: 10 mm – fertig'
+      warn:'Modell verschwunden? Nicht suchen, sondern „Alles einpassen“ – meist ist die Ansicht nur weit weggezoomt.'
     },
     {
       short:'Speichern & weiter', title:'Speichern und weitermachen', section:'Abschluss',
-      target:'[data-act="save"]', callout:'Speichern',
+      img:'assets/13_speichern.jpg',
+      alt:'Datei-Menü in FreeCAD mit Speichern, Speichern unter und PDF exportieren',
+      caption:'Datei-Menü: „Speichern“ (Strg+S) oder „Speichern unter …“',
       lead:'Zum Schluss sichern, damit nichts verloren geht.',
       bullets:[
-        'Auf '+IC('save')+' <b>Speichern</b> klicken oder <kbd>Strg</kbd>+<kbd>S</kbd>.',
+        'Auf <b>Speichern</b> klicken oder <kbd>Strg</kbd>+<kbd>S</kbd>.',
         'Dateinamen wählen, z. B. <span class="mono">quader.FCStd</span>. FreeCAD speichert Modellbaum und Verlauf in einer Datei.',
         'Danach: Tasche, Bohrung, Verrundung … deiner Fantasie sind keine Grenzen gesetzt.'
       ],
       tip:'Vor dem Speichern lohnt ein Blick auf den Modellbaum: Skizze geschlossen, Körper aktiv, nichts versehentlich ausgeblendet.',
-      keys:['Strg','S'],
-      status:'Bereit zum Speichern'
+      keys:['Strg','S']
     }
   ];
 
-  var N = STEPS.length;
-  var KEY = 'freecad-grundkurs-v1';
-
-  var ICONS = [
-    ['doc','Neues Dokument','Strg+N','Legt eine leere Datei an.'],
-    ['folder','Öffnen','Strg+O','Lädt eine gespeicherte .FCStd-Datei.'],
-    ['save','Speichern','Strg+S','Sichert das aktuelle Dokument.'],
-    ['partdesign','Part Design','','Arbeitsbereich für parametrische Bauteile.'],
-    ['body','Neuer Körper','','Container für ein Bauteil, inklusive Ursprung.'],
-    ['sketch','Neue Skizze','','2D-Zeichnung auf einer Ebene anlegen.'],
-    ['rect','Rechteck','','Rechteck über zwei Eckpunkte.'],
-    ['rect-center','Zentriertes Rechteck','','Rechteck symmetrisch um einen Mittelpunkt.'],
-    ['constraint','Randbedingung','','Horizontal, vertikal, parallel, Symmetrie …'],
-    ['dim','Bemaßung','','Festen Abstand oder Winkel setzen.'],
-    ['close','Skizze schließen','','Zurück in den 3D-Bereich.'],
-    ['pad','Aufpolstern (Pad)','','Skizze senkrecht zu einem Volumen extrudieren.'],
-    ['pocket','Tasche (Pocket)','','Ausschnitt in den Körper schneiden.'],
-    ['revolve','Drehen (Revolution)','','Skizze um eine Achse rotieren.'],
-    ['iso','Isometrisch','','Schrägansicht von vorn oben.'],
-    ['fit','Alles einpassen','','Modell zurück ins Sichtfenster holen.'],
-    ['eye','Sichtbarkeit','Leertaste','Element ein- oder ausblenden.'],
-    ['origin','Ursprung','','Nullpunkt mit XY-, XZ- und YZ-Ebene.']
-  ];
-
-  /* =====================================================================
-     Zustand
-     ===================================================================== */
-  var fcwin = $('#fcwin');
-  var reader = $('#reader');
-  var mockwrap = $('#mockwrap');
-  var stage = $('#stage');
-  var callout = $('#callout');
-  var scene = $('#scene');
+  N = STEPS.length;
+  var FINAL_IMG = 'assets/11_quader.jpg';
+  var KEY = 'freecad-grundkurs-v2';
 
   var progress = 0;
   try {
     var saved = parseInt(localStorage.getItem(KEY) || '0', 10);
     if (!isNaN(saved) && saved >= 0 && saved <= N) progress = saved;
   } catch(e) {}
-  /* Direktlink auf einen Schritt: index.html?schritt=6 – oder ?schritt=fertig */
   try {
     var params = new URLSearchParams(location.search);
     var raw = params.get('schritt') || params.get('step') || '';
@@ -929,204 +450,74 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
     }
   } catch(e) {}
 
-  function isSketch(p){ return p >= 5 && p <= 8; }
-  function isDone(p){ return p >= N; }
+  var reader = $('#reader');
+  var shotImg = $('#shotImg');
+  var shotCap = $('#shotCap');
+  var lightbox = $('#lightbox');
+  var lbImg = $('#lbImg');
+  var lbCaption = $('#lbCaption');
 
-  /* =====================================================================
-     Modellbaum
-     ===================================================================== */
-  function treeHTML(p){
-    if (p < 1) return '<div class="tree-empty">Kein Dokument geöffnet.<br>Starte mit „Neues Dokument“.</div>';
-    var sketchMode = isSketch(p);
-    var h = '<div class="tree-row"><svg class="ico"><use href="#i-doc"/></svg><span>Unbenannt</span>'+
-            (p < N ? '<span class="star">*</span>' : '')+'</div>';
-    if (p >= 3){
-      h += '<div class="tree-row lvl1 body '+(sketchMode ? '' : 'active')+'">'+
-           '<svg class="ico"><use href="#i-eye"/></svg>'+
-           '<svg class="ico"><use href="#i-body"/></svg><span>Körper</span></div>';
-      h += '<div class="tree-row lvl2"><svg class="ico"><use href="#i-origin"/></svg><span>Ursprung</span></div>';
-      if (p >= 4){
-        h += '<div class="tree-row lvl3 muted"><svg class="ico"><use href="#i-plane"/></svg><span>XY-Ebene</span></div>';
-        h += '<div class="tree-row lvl3 muted"><svg class="ico"><use href="#i-plane"/></svg><span>XZ-Ebene</span></div>';
-        h += '<div class="tree-row lvl3 muted"><svg class="ico"><use href="#i-plane"/></svg><span>YZ-Ebene</span></div>';
-        h += '<div class="tree-row lvl2 '+(sketchMode ? 'active' : '')+'"><svg class="ico"><use href="#i-sketch"/></svg><span>Skizze</span></div>';
-      }
-      if (p >= 11){
-        h += '<div class="tree-row lvl2"><svg class="ico"><use href="#i-pad"/></svg><span>Aufpolstern</span></div>';
-      }
+  function isDone(){ return progress >= N; }
+
+  /* ---------- Schrittliste ---------- */
+  function renderOutline(){
+    $('#steplist').innerHTML = STEPS.map(function(s, i){
+      var cls = i < progress ? 'done' : (i === progress ? 'current' : '');
+      var num = i < progress ? '✓' : (i + 1);
+      return '<li><button class="stepitem '+cls+'" data-jump="'+i+'">'+
+             '<span class="n">'+num+'</span><span class="t">'+s.short+'</span></button></li>';
+    }).join('');
+  }
+
+  /* ---------- Bild ---------- */
+  function currentImage(){
+    return isDone() ? FINAL_IMG : STEPS[progress].img;
+  }
+
+  function renderShot(){
+    var img = currentImage();
+    if (shotImg.getAttribute('src') !== img) {
+      shotImg.style.opacity = '0';
+      shotImg.src = img;
+      setTimeout(function(){ shotImg.style.opacity = '1'; }, 30);
     }
-    return h;
+    var alt = isDone() ? 'Fertiger Quader 50 x 40 x 10 mm' : STEPS[progress].alt;
+    shotImg.alt = alt;
+    shotCap.innerHTML = isDone()
+      ? '<b>Fertig</b> · 50 × 40 × 10 mm · FreeCAD 1.1'
+      : '<b>Echter Screenshot</b> · ' + STEPS[progress].caption;
+    if (lightbox.classList.contains('show')) updateLightbox();
   }
 
-  /* =====================================================================
-     Aufgaben-Panel
-     ===================================================================== */
-  function panelStartPart(disabled){
-    return '<div class="panel">'+
-      '<div class="panel-head"><svg class="ico"><use href="#i-partdesign"/></svg><span>Start Part</span><span class="chev">▴</span></div>'+
-      '<div class="panel-body">'+
-        (disabled
-          ? '<span class="link disabled"><svg class="ico"><use href="#i-body"/></svg>Neuer Körper</span>'
-          : '<button class="link" data-act="body"><svg class="ico"><use href="#i-body"/></svg>Neuer Körper</button>')+
-      '</div></div>';
-  }
-  function panelTools(withSketch){
-    return '<div class="panel">'+
-        '<div class="panel-head"><svg class="ico"><use href="#i-body"/></svg><span>Hilfswerkzeuge</span><span class="chev">▴</span></div>'+
-        '<div class="panel-body">'+
-          (withSketch
-            ? '<button class="link" data-act="sketch"><svg class="ico"><use href="#i-sketch"/></svg>Neue Skizze</button>'
-            : '<span class="link disabled"><svg class="ico"><use href="#i-sketch"/></svg>Neue Skizze</span>')+
-        '</div></div>'+
-      '<div class="panel">'+
-        '<div class="panel-head"><svg class="ico"><use href="#i-body"/></svg><span>Boolesche Werkzeuge</span><span class="chev">▴</span></div>'+
-        '<div class="panel-body"><span class="link disabled">Boolesche Verknüpfung</span></div>'+
-      '</div>';
-  }
-  function attachDialog(){
-    return '<div class="task-title">Befestigung auswählen</div>'+
-      '<div class="panel">'+
-        '<div class="panel-head"><span>Ebene wählen</span></div>'+
-        '<div class="listbox">'+
-          '<div class="listrow selected">XY-Ebene (Basis-Ebene)</div>'+
-          '<div class="listrow">XZ-Ebene (Basis-Ebene)</div>'+
-          '<div class="listrow">YZ-Ebene (Basis-Ebene)</div>'+
-        '</div>'+
-        '<div class="dlg-actions">'+
-          '<button class="btn small primary" data-act="attach-ok">OK</button>'+
-          '<button class="btn small">Abbrechen</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="panel-note">Die Skizze liegt danach auf der XY-Ebene und du blickst von oben darauf.</div>';
-  }
-  function sketchPanel(p){
-    var dof = p >= 8 ? '<span class="badge ok">vollständig bestimmt</span>'
-            : p === 7 ? '<span class="badge">1 Freiheitsgrad</span>'
-            : '<span class="badge">2 Freiheitsgrade</span>';
-    var cons = '';
-    if (p >= 6) cons += '<li>Horizontal (2)</li><li>Vertikal (2)</li><li>Symmetrie (1)</li>';
-    if (p >= 7) cons += '<li>Abstand 50 mm</li>';
-    if (p >= 8) cons += '<li>Abstand 40 mm</li>';
-    var elems = '';
-    for (var i = 1; i <= 4; i++) elems += '<div class="elrow">Kante '+i+'</div>';
-    return '<div class="task-title">Skizzenbearbeitung</div>'+
-      '<div class="panel"><div class="panel-body">Leere Skizze '+dof+'</div></div>'+
-      '<div class="panel">'+
-        '<div class="panel-head"><svg class="ico"><use href="#i-constraint"/></svg><span>Randbedingungen</span><span class="chev">▴</span></div>'+
-        '<div class="panel-body"><ul class="smalllist">'+(cons || '<li class="muted">noch keine</li>')+'</ul></div>'+
-      '</div>'+
-      '<div class="panel">'+
-        '<div class="panel-head"><svg class="ico"><use href="#i-rect"/></svg><span>Elemente</span><span class="chev">▴</span></div>'+
-        '<div class="panel-body">'+(p >= 6 ? elems : '<span class="muted">—</span>')+'</div>'+
-      '</div>'+
-      '<button class="btn small wide" data-act="close-sketch"><svg class="ico"><use href="#i-close"/></svg>Skizze schließen</button>';
-  }
-  function padDialog(){
-    return '<div class="task-title">Aufpolstern-Parameter</div>'+
-      '<div class="panel">'+
-        '<div class="panel-body form">'+
-          '<label class="fld"><span>Länge</span><input value="10,00 mm" readonly aria-label="Länge"></label>'+
-          '<label class="fld"><span>Profil</span><input value="Skizze" readonly aria-label="Profil"></label>'+
-          '<label class="chk"><input type="checkbox" checked disabled> Symmetrisch zur Ebene</label>'+
-          '<label class="chk"><input type="checkbox" disabled> Umgekehrt</label>'+
-        '</div>'+
-        '<div class="dlg-actions">'+
-          '<button class="btn small primary" data-act="pad-ok">OK</button>'+
-          '<button class="btn small">Abbrechen</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="panel-note">Die Vorschau im 3D-Fenster ist halbtransparent.</div>';
-  }
-  function tasksHTML(p){
-    if (p === 0) return '<div class="panel"><div class="panel-head">Willkommen</div><div class="panel-body muted">Kein Dokument geöffnet.<br>Starte mit <b>Neues Dokument</b>.</div></div>';
-    if (p === 1) return panelStartPart(true) + '<div class="panel-note">Wähle zuerst den Arbeitsbereich <b>Part Design</b>.</div>';
-    if (p === 2) return panelStartPart(false);
-    if (p === 3) return panelStartPart(false) + panelTools(true);
-    if (p === 4) return attachDialog();
-    if (p >= 5 && p <= 8) return sketchPanel(p);
-    if (p === 9) return panelStartPart(false) + panelTools(false);
-    if (p === 10) return padDialog();
-    return panelStartPart(false) +
-      '<div class="panel"><div class="panel-head">Info</div><div class="panel-body">Quader: <b>50 × 40 × 10 mm</b><br>Eine Skizze, ein Aufpolstern.</div></div>'+
-      '<div class="panel-note">Nächster Schritt: Tasche, Bohrung oder Verrundung ausprobieren.</div>';
+  function updateLightbox(){
+    lbImg.src = currentImage();
+    lbImg.alt = isDone() ? 'Fertiger Quader' : STEPS[progress].alt;
+    lbCaption.textContent = (isDone() ? N : progress + 1) + ' / ' + N;
   }
 
-  /* =====================================================================
-     Szene
-     ===================================================================== */
-  function toggle(id, on){
-    var el = document.getElementById(id);
-    if (el) el.classList.toggle('show', !!on);
-  }
-
-  function renderScene(p){
-    toggle('gGrid', isSketch(p));
-    toggle('gAxes', isSketch(p));
-    toggle('gRect', p >= 6 && p <= 8);
-    toggle('gDimH', p >= 7 && p <= 8);
-    toggle('gDimV', p >= 8 && p <= 8);
-    toggle('gIsoSketch', p === 9);
-    toggle('gSolid', p >= 10);
-    scene.classList.toggle('full', p >= 8);
-    document.getElementById('gSolid').classList.toggle('preview', p === 10);
-    $('#viewBadge').textContent = p === 0 ? 'Startseite'
-      : isSketch(p) ? 'Skizzenbearbeitung · Draufsicht'
-      : (p >= 9 ? 'Isometrisch' : '3D-Ansicht');
-    $('#startPage').classList.toggle('show', p === 0);
-    $('#navHelp').classList.toggle('show', p === 11);
-  }
-
-  function renderGUI(p){
-    fcwin.dataset.p = p;
-
-    var wb = p < 2 ? 'Start' : (isSketch(p) ? 'Sketcher' : 'Part Design');
-    $('#wbLabel').textContent = wb;
-    $('#wbUse').setAttribute('href', '#i-' + (p < 2 ? 'doc' : (isSketch(p) ? 'sketch' : 'partdesign')));
-
-    $('#tbPD').hidden = !(p >= 2 && !isSketch(p));
-    $('#tbSketch').hidden = !isSketch(p);
-
-    $('#treeScroll').innerHTML = treeHTML(p);
-    $('#tasksScroll').innerHTML = tasksHTML(p);
-
-    $('#tabDoc').hidden = p < 1;
-    $('#tabStart').classList.toggle('active', p < 1);
-    $('#tabDoc').classList.toggle('active', p >= 1);
-    $('#tabStar').style.display = (p >= 1 && p < N) ? '' : 'none';
-    $('#tabName').textContent = p >= 1 ? 'Unbenannt' : 'Start';
-
-    $('#statusText').textContent = isDone(p) ? 'Gespeichert – viel Erfolg beim nächsten Bauteil!' : (STEPS[p].status || 'Bereit');
-    $('#unitLabel').textContent = (p < 2 ? 'Start' : (isSketch(p) ? 'Sketcher' : 'Part Design')) + ' · mm';
-
-    renderScene(p);
-  }
-
-  /* =====================================================================
-     Lesebereich
-     ===================================================================== */
+  /* ---------- Lesetext ---------- */
   function keysHTML(keys){
     return keys.map(function(k){ return '<kbd>'+k+'</kbd>'; }).join('<span style="color:#5d6874">+</span>');
   }
 
-  function renderReader(p){
-    if (isDone(p)) { reader.innerHTML = finalCard(); reader.scrollTop = 0; return; }
-    var s = STEPS[p];
-    var html = '<div class="reader-inner">'+
-      '<div class="kicker">Schritt '+(p+1)+' von '+N+' · '+s.section+'</div>'+
+  function renderReader(){
+    if (isDone()) { reader.innerHTML = finalCard(); reader.scrollTop = 0; return; }
+    var s = STEPS[progress];
+    reader.innerHTML = '<div class="reader-inner">'+
+      '<div class="kicker">Schritt '+(progress+1)+' von '+N+' · '+s.section+'</div>'+
       '<h2>'+s.title+'</h2>'+
       '<p class="lead">'+s.lead+'</p>'+
       '<ul class="bullets">'+s.bullets.map(function(b){ return '<li>'+b+'</li>'; }).join('')+'</ul>'+
       (s.tip ? '<div class="note tip"><b>Gut zu wissen</b><p>'+s.tip+'</p></div>' : '')+
       (s.warn ? '<div class="note warn"><b>Achtung</b><p>'+s.warn+'</p></div>' : '')+
       (s.keys ? '<div class="keys"><span>Kürzel:</span>'+keysHTML(s.keys)+'</div>' : '')+
-      '<div class="mouselegend"><kbd>M1</kbd> linke Maustaste <kbd>M2</kbd> rechte Maustaste <kbd>Esc</kbd> abbrechen</div>'+
+      '<div class="keys"><span>Maus:</span><kbd>M1</kbd> links <kbd>M2</kbd> rechts <kbd>Esc</kbd> abbrechen</div>'+
       '<div class="actions">'+
-        '<button class="btn ghost" data-nav="prev" '+(p === 0 ? 'disabled' : '')+'>← Zurück</button>'+
+        '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
         '<button class="btn primary" data-nav="next">Weiter →</button>'+
       '</div>'+
-      '<p class="advance-hint">Tipp: Du kannst auch direkt auf das orange markierte Element im FreeCAD-Fenster klicken.</p>'+
+      '<p class="advance-hint"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Bild anklicken, um es groß zu sehen. Mit ← → blätterst du.</p>'+
     '</div>';
-    reader.innerHTML = html;
     reader.scrollTop = 0;
   }
 
@@ -1165,78 +556,19 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
       '<h3>Nächste Schritte</h3>'+
       '<div class="chips"><span class="chip">Tasche (Pocket)</span><span class="chip">Bohrung</span><span class="chip">Verrundung</span><span class="chip">Muster</span><span class="chip">TechDraw-Zeichnung</span><span class="chip">Export als STL</span></div>'+
       '<div class="actions">'+
-        '<button class="btn" data-nav="reset"><svg class="ico"><use href="#i-reset"/></svg>Nochmal von vorn</button>'+
-        '<button class="btn primary" data-nav="legend"><svg class="ico"><use href="#i-help"/></svg>Icon-Legende</button>'+
+        '<button class="btn" data-nav="reset">↺ Nochmal von vorn</button>'+
+        '<button class="btn primary" data-nav="last">Schritt 13 ansehen</button>'+
       '</div>'+
     '</div>';
   }
 
-  /* =====================================================================
-     Schrittliste
-     ===================================================================== */
-  function renderOutline(){
-    var ol = $('#steplist');
-    ol.innerHTML = STEPS.map(function(s, i){
-      var cls = i < progress ? 'done' : (i === progress ? 'current' : '');
-      var num = i < progress ? '<svg class="ico" style="width:12px;height:12px"><use href="#i-check"/></svg>' : (i+1);
-      return '<li><button class="stepitem '+cls+'" data-jump="'+i+'">'+
-             '<span class="n">'+num+'</span><span class="t">'+s.short+'</span></button></li>';
-    }).join('');
-  }
-
-  /* =====================================================================
-     Hervorhebung
-     ===================================================================== */
-  function updateHighlight(){
-    $$('.hl', fcwin).forEach(function(el){ el.classList.remove('hl'); });
-    callout.classList.remove('show');
-
-    if (isDone(progress)) return;
-    var step = STEPS[progress];
-    var el = step.calloutOn ? $(step.calloutOn, fcwin) : $(step.target, fcwin);
-    if (!el) return;
-    el.classList.add('hl');
-
-    var w = mockwrap.getBoundingClientRect();
-    var r = el.getBoundingClientRect();
-    if (!w.width) return;
-    var x = r.left - w.left + r.width/2;
-    var y = r.top - w.top + r.height + 11;
-    var above = false;
-    if (y > w.height - 34){ y = r.top - w.top - 36; above = true; }
-    x = Math.max(64, Math.min(w.width - 64, x));
-    callout.style.left = x + 'px';
-    callout.style.top = y + 'px';
-    callout.classList.toggle('above', above);
-    $('#calloutText').textContent = step.callout || 'Hier klicken';
-    callout.classList.add('show');
-  }
-
-  /* =====================================================================
-     Skalierung des simulierten Fensters
-     ===================================================================== */
-  function fitMock(){
-    var availW = Math.max(320, stage.clientWidth - 36);
-    var availH = Math.max(300, stage.clientHeight - 36);
-    var s = Math.min(availW / 1000, availH / 620, 1);
-    s = Math.max(s, 0.62);
-    fcwin.style.transform = 'scale(' + s + ')';
-    mockwrap.style.width  = Math.round(1000 * s) + 'px';
-    mockwrap.style.height = Math.round(620 * s) + 'px';
-  }
-
-  /* =====================================================================
-     Rendern
-     ===================================================================== */
+  /* ---------- Rendern ---------- */
   function render(){
-    $('#bar').style.width = (progress / N * 100) + '%';
-    $('#progressNum').textContent = (isDone(progress) ? N : progress + 1) + ' / ' + N;
+    $('#bar').style.width = (Math.min(progress, N) / N * 100) + '%';
+    $('#progressNum').textContent = (isDone() ? N : progress + 1) + ' / ' + N;
     renderOutline();
-    renderGUI(progress);
-    renderReader(progress);
-    fitMock();
-    updateHighlight();
-    requestAnimationFrame(updateHighlight);
+    renderReader();
+    renderShot();
     try { localStorage.setItem(KEY, String(progress)); } catch(e) {}
   }
 
@@ -1245,19 +577,16 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
     render();
   }
 
-  /* =====================================================================
-     Interaktion
-     ===================================================================== */
-  fcwin.addEventListener('click', function(e){
-    var actEl = e.target.closest ? e.target.closest('[data-act]') : null;
-    if (!actEl || isDone(progress)) return;
-    var step = STEPS[progress];
-    if (actEl.matches(step.target)) {
-      e.preventDefault();
-      go(progress + 1);
-    } else {
-      $('#statusText').textContent = 'Folge dem orange markierten Schritt.';
-    }
+  function openLightbox(){
+    updateLightbox();
+    lightbox.classList.add('show');
+  }
+  function closeLightbox(){ lightbox.classList.remove('show'); }
+
+  /* ---------- Events ---------- */
+  $('#steplist').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jump]');
+    if (btn) go(parseInt(btn.getAttribute('data-jump'), 10));
   });
 
   reader.addEventListener('click', function(e){
@@ -1266,57 +595,34 @@ dialog#legend::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
     var nav = btn.getAttribute('data-nav');
     if (nav === 'next') go(progress + 1);
     else if (nav === 'prev') go(progress - 1);
-    else if (nav === 'reset') reset();
-    else if (nav === 'legend') openLegend();
-  });
-
-  $('#steplist').addEventListener('click', function(e){
-    var btn = e.target.closest('[data-jump]');
-    if (!btn) return;
-    go(parseInt(btn.getAttribute('data-jump'), 10));
+    else if (nav === 'last') go(N - 1);
+    else if (nav === 'reset') { progress = 0; render(); }
   });
 
   document.addEventListener('keydown', function(e){
     if (e.target.matches && e.target.matches('input, textarea, select')) return;
-    if (document.getElementById('legend').open) return;
-    if (e.key === 'ArrowRight'){ e.preventDefault(); go(progress + 1); }
-    if (e.key === 'ArrowLeft'){ e.preventDefault(); go(progress - 1); }
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(progress + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(progress - 1); }
   });
 
-  var legendDlg = document.getElementById('legend');
-  function openLegend(){ if (!legendDlg.open) legendDlg.showModal(); }
-  $('#legendBtn').addEventListener('click', openLegend);
-  legendDlg.addEventListener('click', function(e){
-    if (e.target.closest('[data-close]')) legendDlg.close();
+  $('#shot').addEventListener('click', openLightbox);
+  $('#zoomBtn').addEventListener('click', openLightbox);
+  $('#lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox) closeLightbox();
   });
-  legendDlg.addEventListener('click', function(e){
-    if (e.target === legendDlg) legendDlg.close();
-  });
+  $('#lbPrev').addEventListener('click', function(e){ e.stopPropagation(); go(progress - 1); });
+  $('#lbNext').addEventListener('click', function(e){ e.stopPropagation(); go(progress + 1); });
 
-  function reset(){
+  $('#resetBtn').addEventListener('click', function(){
     progress = 0;
     try { localStorage.removeItem(KEY); } catch(e) {}
     render();
-  }
-  $('#resetBtn').addEventListener('click', reset);
+  });
 
-  if (location.hash === '#legende') openLegend();
-
-  /* Legende füllen */
-  $('#legendGrid').innerHTML = ICONS.map(function(it){
-    return '<div class="legend-item">'+
-      '<svg class="ico" aria-hidden="true"><use href="#i-'+it[0]+'"/></svg>'+
-      '<div><h4>'+it[1]+(it[2] ? '<span class="key">'+it[2]+'</span>' : '')+'</h4>'+
-      '<p>'+it[3]+'</p></div></div>';
-  }).join('');
-
-  /* Start */
-  if (window.ResizeObserver){
-    new ResizeObserver(function(){ fitMock(); updateHighlight(); }).observe(stage);
-  } else {
-    window.addEventListener('resize', function(){ fitMock(); updateHighlight(); });
-  }
-  window.addEventListener('resize', function(){ fitMock(); updateHighlight(); });
+  /* Bilder vorladen */
+  STEPS.forEach(function(s){ var im = new Image(); im.src = s.img; });
 
   render();
 })();
