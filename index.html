@@ -212,7 +212,7 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 33</span>
+    <span class="progressnum" id="progressNum">1 / 34</span>
   </div>
   <div class="top-actions">
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
@@ -253,7 +253,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 33</span>
+    <span id="lbCaption">1 / 34</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -331,10 +331,19 @@ table.shortcuts td:first-child{width:52%}
       img:'assets/06_rechteck.jpg',
       alt:'Rechteck um den Ursprung mit roten Randbedingungen',
       lead:'Starte im <b>Ursprung</b>, ziehe nach außen und klicke für die Ecke.',
-      list:['<kbd>Esc</kbd> beendet den Befehl.'],
-      hint:'Der gelbe Punkt zeigt: Du bist genau im Ursprung.',
+      list:['<kbd>Esc</kbd> beendet den Befehl.', 'Die roten Symbole sind <b>Randbedingungen</b>.'],
+      hint:'Horizontal, vertikal und symmetrisch: Die Form ist fixiert – die Größe fehlt noch (2 Freiheitsgrade).',
       mouse:true,
       focus:[0.4270, 0.5150, 0.0600, 0.0640], lens:[0.7000, 0.3199], zoom:2.5
+    },
+    {
+      short:'Symmetrie', title:'Lage durch Symmetrie',
+      img:'assets/06_rechteck.jpg',
+      alt:'Rechteck mit Symmetrie-Randbedingung zum Ursprung',
+      lead:'Die <b>Symmetrie zum Ursprung</b> hält das Rechteck mittig.',
+      list:['Die roten Pfeile an den Ecken zeigen die Symmetrie.', 'Deshalb brauchst du nur zwei Maße – die Lage ist schon fest.'],
+      hint:'Das Werkzeug „Zentriertes Rechteck“ setzt diese Randbedingung automatisch.',
+      focus:[0.5970, 0.2750, 0.0500, 0.0700], lens:[0.3000, 0.3000], zoom:2.6
     },
     {
       short:'Bemaßung', title:'Bemaßung starten',
@@ -365,7 +374,7 @@ table.shortcuts td:first-child{width:52%}
       img:'assets/08_bemassung_40.jpg',
       alt:'Vollständig bestimmte Skizze mit 50 und 40 mm',
       lead:'Rechte Kante anklicken, <b>40</b> eintragen.',
-      list:['Die Linien werden <b>grün</b> – die Skizze ist fertig.'],
+      list:['Größe (50 × 40) und Lage (Symmetrie) sind fest – die Linien werden <b>grün</b>.'],
       focus:[0.5410, 0.4585, 0.0400, 0.1066], lens:[0.7000, 0.3199], zoom:2.4
     },
     {
